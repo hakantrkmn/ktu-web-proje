@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    $('#havadurumu').weatherfeed(['TUXX0029']);
 
     function scroll() {
       $('#events ol li:first').slideUp(function() {
