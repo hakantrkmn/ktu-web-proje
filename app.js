@@ -36,14 +36,14 @@ $(document).ready(function() {
                       
                 
             var havaresmi = result.weather[0].main;
-            console.log(havaDurumUrl)
+            console.log(result)
 
           switch(havaresmi){
              case 'Clouds':
                     day = "bulutludur";
                    $("#durumimg").attr("src","https://img.icons8.com/color/48/000000/partly-cloudy-day.png");
                     break;
-             case 'Rains':
+             case 'Rain':
                     day = "yağmurludur";
               $("#durumimg").attr("src","https://img.icons8.com/color/48/000000/rain.png");
                     break;
