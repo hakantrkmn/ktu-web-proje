@@ -1,0 +1,56 @@
+body {
+    background:#dbdbdb;
+  }
+
+  @import url(https://fonts.googleapis.com/css?family=Roboto);
+
+
+
+.card.sa{
+  margin: 15px auto;
+  width: 340px;
+  height: 220px;
+  background-color: #fff;
+  border-radius: 7px;
+  box-shadow: 0.3px 0.3px 0.3px 1px rgba(0, 0, 0, 0.2);
+  font-family: 'Roboto', sans-serif;
+}
+
+.city, .date{
+  color: gray;
+  margin-left: 35px;
+}
+
+.city{
+  padding-top: 50px;
+  font-size: 26px;
+}
+
+.date{
+  font-size: 20px;
+  line-height: 40px;
+}
+
+.sun{
+  position: absolute;
+  display: inline;
+  margin-left: 35px;
+	width: 70px;
+	height: 70px;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+.temp{
+  padding-left: 125px;
+  padding-top: 6px;
+  font-size: 50px;
+}
+
+
+
+
+  
+
+  
