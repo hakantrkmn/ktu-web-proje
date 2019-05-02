@@ -39,9 +39,6 @@ $(document).ready(function() {
                       
                 
             var havaresmi = result.weather[0].main;
-
-            console.log(result)
-
             console.log(result.weather)
 
           switch(havaresmi){

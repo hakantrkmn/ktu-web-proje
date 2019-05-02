@@ -43,17 +43,7 @@
 
 
 
-    <?php if ($_GET['durum']==ok && isset($_SESSION['kullanici_email']) ) {?>
-        <div class="alert alert-success">
-            Giriş Başarılı
-        </div>
-        
-   <?php header("Refresh: 2; index.php "); }
-   else if($_GET['durum']==no){
-        ?> <div class="alert alert-danger">
-            Giriş Başarısız
-        </div>
-    <?php header("Refresh: 2; giris.php "); } ?> 
+    
     
      
  
@@ -61,7 +51,7 @@
     <form action="islem.php" class="form-signin" method="POST">
       <img class="mb-4" src="kisi.png" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">GİRİŞ YAP</h1>
-      <input type="email" name="kullanici_email"  class="form-control mt-3" placeholder="Email address" required="">
+      <input type="text" name="kullanici_adi"  class="form-control mt-3" placeholder="Kullanici Adi" required="">
       <input type="password"  name="kullanici_password" class="form-control mt-3" placeholder="Password" required="">
       
       <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" name="kullanicigiris">Giriş Yap</button>
