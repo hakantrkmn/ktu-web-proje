@@ -1,36 +1,21 @@
-<?php  include 'header.php';?>
+<?php
+// bağlan phpde session dursun headerin içinde bişe olmasın her yere bağlan phpyi eklersin
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+include '../../baglan.php';
 
-    <title>DataTables | Gentelella</title>
+if (isset($_SESSION['k_ad']))
+{    
+$kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
+$kullanicisor->execute(array('email'=>$_SESSION['k_ad']));
+$say=$kullanicisor->rowCount();
+$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+$kul_id = $kullanicicek['k_id'];
+$duyurusor=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id");
+$duyurusor->execute(array('kul_id'=>$kul_id ));
+}
 
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- Datatables -->
-    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
- 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+include 'header.php';?>
 
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-  </head>
 
   <body class="nav-md">
     <div class="container body">
@@ -74,17 +59,6 @@
                         <li><a href="dersprogrami.php"><i class="fa fa-home"></i> ders <span class="fa fa-chevron-down"></span></a>
                         </li>
                         <li><a href="resim.php"><i class="fa fa-home"></i> resim <span class="fa fa-chevron-down"></span></a>
-
-                        <li><a href="duyuru.html"><i class="fa fa-home"></i> duyuru <span class="fa fa-chevron-down"></span></a>
-                        </li>
-                        <li><a href="video.html"><i class="fa fa-home"></i> video <span class="fa fa-chevron-down"></span></a>
-                        </li>
-                        <li><a href="etkinlik.html"><i class="fa fa-home"></i> etkinlik <span class="fa fa-chevron-down"></span></a>
-                        </li>
-                        <li><a href="dersprogrami.php"><i class="fa fa-home"></i> ders <span class="fa fa-chevron-down"></span></a>
-                        </li>
-                        <li><a href="resim.html"><i class="fa fa-home"></i> resim <span class="fa fa-chevron-down"></span></a>
-                        </li>
                       </ul>
                     </div>
       

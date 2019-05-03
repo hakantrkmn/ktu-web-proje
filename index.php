@@ -1,3 +1,26 @@
+<?php
+include 'baglan.php';
+
+
+if (isset($_GET['bolum'])) {
+  $bolum = $_GET['bolum'];
+  $kid=$db->prepare("SELECT k_id FROM kullanici where k_ad=:kul_ad ");
+  $kid->execute(array('kul_ad'=>$bolum ));
+  $kid=$kid->fetch(PDO::FETCH_OBJ);
+  $duyurular=$db->prepare("SELECT * FROM duyuru where k_id=:kul_id ");
+  $duyurular->execute(array('kul_id'=>$kid->k_id ));
+  $duyurular=$duyurular->fetchAll(PDO::FETCH_OBJ);
+  // şırda notice verebilir salla bişe olmaz ondan
+  $yazi = $duyurular[0]->duyuru;
+  for ($i=1;$i<count($duyurular);$i++) 
+  { 
+    $yazi = $yazi . " - " . $duyurular[$i]->duyuru;
+  }
+  $etkinlik=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id ");
+  $etkinlik->execute(array('kul_id'=>$kid->k_id ));
+  $etkinlik=$etkinlik->fetchAll(PDO::FETCH_OBJ);
+}
+?>
 
 <!DOCTYPE html>
 
@@ -115,10 +138,9 @@
       </div>
       <div style="text-align: center;margin-top: 15px" id="events">
           <ol style="list-style: none;padding: 0;word-break: break-all">
-            <li>asdjbslşdbasdjkaşdbsaşlkasbdkasdklsndlşkbasdklsdşkbasşdşlsdnkslsşaasdajdbkşjladnlkşansşal</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
+          <?php foreach ($etkinlik as $etkinlik): ?>
+                    <li> <?php echo $etkinlik->etkinlik ?> </li>
+          <?php endforeach; ?>
           </ol>
       </div>    
     </div>
@@ -136,7 +158,8 @@
 <div>
     <div class="card">
       <div class="card-body">
-        <marquee behavior="scroll" direction="left">Your scrolling text goes here - akjsdbşkasdnşlank</marquee>
+        <marquee behavior="scroll" direction="left"> <?php echo $yazi ?></marquee>
+
       </div>
     </div>
   </div>

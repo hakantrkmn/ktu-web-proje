@@ -1,78 +1,37 @@
 <?php
-include 'header.php';
+// bağlan phpde session dursun headerin içinde bişe olmasın her yere bağlan phpyi eklersin
+
+include '../../baglan.php';
+
 
 if (isset($_SESSION['k_ad']))
- {
-
+{    
+$kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
+$kullanicisor->execute(array('email'=>$_SESSION['k_ad']));
+$say=$kullanicisor->rowCount();
+$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 $kul_id = $kullanicicek['k_id'];
-
-
 $dersprogramisor=$db->prepare("SELECT * FROM ders where k_id=:kul_id ");
-
-  $dersprogramisor->execute(array(
-    'kul_id'=>$kul_id ));
-
-  $dersprogramicek=$dersprogramisor->fetch(PDO::FETCH_ASSOC);
-
-
-  
- 
+$dersprogramisor->execute(array('kul_id'=>$kul_id ));
+$dersprogramicek=$dersprogramisor->fetch(PDO::FETCH_ASSOC);
 }
-
-
-
-
-
-
-
+include 'header.php';
 
  ?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>DataTables | Gentelella</title>
-
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- Datatables -->
-    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-  </head>
 
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
-            </div>
+
 
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="https://s3.amazonaws.com/prod.skimble/photos/29359/hstzsdw4avx_full.gif" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome  <a href="../../cikis.php"> <i class="fas fa-sign-out-alt"></i></a> </span>
@@ -117,18 +76,10 @@ $dersprogramisor=$db->prepare("SELECT * FROM ders where k_id=:kul_id ");
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo $kullanicicek['k_ad'] ?>
+                    <img src="https://s3.amazonaws.com/prod.skimble/photos/29359/hstzsdw4avx_full.gif" alt=""><?php echo $kullanicicek['k_ad'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right"> 
                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
@@ -141,13 +92,7 @@ $dersprogramisor=$db->prepare("SELECT * FROM ders where k_id=:kul_id ");
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Users <small>Some examples to get you started</small></h3>
-              </div>
 
-
-            </div>
 
             <div class="clearfix"></div>
 
@@ -155,7 +100,7 @@ $dersprogramisor=$db->prepare("SELECT * FROM ders where k_id=:kul_id ");
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Default Example <small>Users</small></h2>
+                    <h2>Ders Programı</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

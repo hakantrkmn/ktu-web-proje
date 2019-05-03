@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Anamakine: localhost
--- Üretim Zamanı: 03 May 2019, 19:43:06
--- Sunucu sürümü: 5.7.17-log
--- PHP Sürümü: 5.6.30
+-- Anamakine: 127.0.0.1:3306
+-- Üretim Zamanı: 03 May 2019, 21:51:31
+-- Sunucu sürümü: 5.7.24
+-- PHP Sürümü: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,11 +28,14 @@ SET time_zone = "+00:00";
 -- Tablo için tablo yapısı `ders`
 --
 
-CREATE TABLE `ders` (
-  `ders_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `ders`;
+CREATE TABLE IF NOT EXISTS `ders` (
+  `ders_id` int(11) NOT NULL AUTO_INCREMENT,
   `img` varchar(200) NOT NULL,
-  `k_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `k_id` int(11) NOT NULL,
+  PRIMARY KEY (`ders_id`),
+  KEY `k_id` (`k_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Tablo döküm verisi `ders`
@@ -43,14 +48,65 @@ INSERT INTO `ders` (`ders_id`, `img`, `k_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `duyuru`
+--
+
+DROP TABLE IF EXISTS `duyuru`;
+CREATE TABLE IF NOT EXISTS `duyuru` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `duyuru` varchar(255) NOT NULL,
+  `k_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `kullanici_duyuru` (`k_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `duyuru`
+--
+
+INSERT INTO `duyuru` (`id`, `duyuru`, `k_id`) VALUES
+(3, 'son 14 gün', 3),
+(4, 'son 34 gün', 3),
+(5, 'son gün şimdi', 1),
+(6, 'afasfasf', 1),
+(8, 'hahaha', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `etkinlik`
+--
+
+DROP TABLE IF EXISTS `etkinlik`;
+CREATE TABLE IF NOT EXISTS `etkinlik` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `etkinlik` varchar(255) NOT NULL,
+  `k_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `kullanici_etkinlik` (`k_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `etkinlik`
+--
+
+INSERT INTO `etkinlik` (`id`, `etkinlik`, `k_id`) VALUES
+(1, 'allame gelecek', 1),
+(3, 'asfasf', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `kullanici`
 --
 
-CREATE TABLE `kullanici` (
-  `k_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `kullanici`;
+CREATE TABLE IF NOT EXISTS `kullanici` (
+  `k_id` int(11) NOT NULL AUTO_INCREMENT,
   `k_ad` varchar(20) NOT NULL,
-  `sifre` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `sifre` varchar(20) NOT NULL,
+  PRIMARY KEY (`k_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Tablo döküm verisi `kullanici`
@@ -61,77 +117,6 @@ INSERT INTO `kullanici` (`k_id`, `k_ad`, `sifre`) VALUES
 (2, 'makine', '123456'),
 (3, 'elektrik', '123456');
 
--- --------------------------------------------------------
-
---
--- Tablo için tablo yapısı `yazi`
---
-
-CREATE TABLE `yazi` (
-  `yazi_id` int(11) NOT NULL,
-  `yazi` varchar(250) NOT NULL,
-  `t_id` int(11) NOT NULL,
-  `k_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Tablo döküm verisi `yazi`
---
-
-INSERT INTO `yazi` (`yazi_id`, `yazi`, `t_id`, `k_id`) VALUES
-(2, '7 Mayıs Proje Teslim Son günüdür', 2, 1),
-(3, 'Merhaba ', 1, 1),
-(9, 'asas4454', 1, 1),
-(10, 'sadsad4s5adsa', 2, 1),
-(11, 'sdasdsadsadsad', 1, 3),
-(12, 'SELAM TİRABZON', 1, 3),
-(13, 'TRABZON ŞAMPİ ', 2, 3),
-(14, 'ŞAMPİYON FENERLEN', 2, 3);
-
---
--- Dökümü yapılmış tablolar için indeksler
---
-
---
--- Tablo için indeksler `ders`
---
-ALTER TABLE `ders`
-  ADD PRIMARY KEY (`ders_id`),
-  ADD KEY `k_id` (`k_id`);
-
---
--- Tablo için indeksler `kullanici`
---
-ALTER TABLE `kullanici`
-  ADD PRIMARY KEY (`k_id`);
-
---
--- Tablo için indeksler `yazi`
---
-ALTER TABLE `yazi`
-  ADD PRIMARY KEY (`yazi_id`),
-  ADD KEY `k_id` (`k_id`),
-  ADD KEY `k_id_2` (`k_id`);
-
---
--- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
---
-
---
--- Tablo için AUTO_INCREMENT değeri `ders`
---
-ALTER TABLE `ders`
-  MODIFY `ders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- Tablo için AUTO_INCREMENT değeri `kullanici`
---
-ALTER TABLE `kullanici`
-  MODIFY `k_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- Tablo için AUTO_INCREMENT değeri `yazi`
---
-ALTER TABLE `yazi`
-  MODIFY `yazi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
 --
@@ -143,10 +128,17 @@ ALTER TABLE `ders`
   ADD CONSTRAINT `ders_ibfk_1` FOREIGN KEY (`k_id`) REFERENCES `kullanici` (`k_id`);
 
 --
--- Tablo kısıtlamaları `yazi`
+-- Tablo kısıtlamaları `duyuru`
 --
-ALTER TABLE `yazi`
-  ADD CONSTRAINT `yazi_ibfk_1` FOREIGN KEY (`k_id`) REFERENCES `kullanici` (`k_id`);
+ALTER TABLE `duyuru`
+  ADD CONSTRAINT `kullanici_duyuru` FOREIGN KEY (`k_id`) REFERENCES `kullanici` (`k_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Tablo kısıtlamaları `etkinlik`
+--
+ALTER TABLE `etkinlik`
+  ADD CONSTRAINT `kullanici_etkinlik` FOREIGN KEY (`k_id`) REFERENCES `kullanici` (`k_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
