@@ -1,3 +1,22 @@
+<?php
+
+session_start();
+ob_start(); 
+
+include '../../baglan.php';
+
+$kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
+$kullanicisor->execute(array(
+'email'=>$_SESSION['k_ad']
+));
+$say=$kullanicisor->rowCount();
+$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+
+
+
+
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,6 +42,7 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -45,8 +65,8 @@
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Welcome  <a href="../../cikis.php"> <i class="fas fa-sign-out-alt"></i></a> </span>
+                <h2> <?php echo $kullanicicek['k_ad'] ?> </h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -64,7 +84,7 @@
                         </li>
                         <li><a href="etkinlik.html"><i class="fa fa-home"></i> etkinlik <span class="fa fa-chevron-down"></span></a>
                         </li>
-                        <li><a href="dersprogramı.html"><i class="fa fa-home"></i> ders <span class="fa fa-chevron-down"></span></a>
+                        <li><a href="dersprogrami.php"><i class="fa fa-home"></i> ders <span class="fa fa-chevron-down"></span></a>
                         </li>
                         <li><a href="resim.html"><i class="fa fa-home"></i> resim <span class="fa fa-chevron-down"></span></a>
                         </li>
@@ -87,7 +107,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><?php echo $kullanicicek['k_ad'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
