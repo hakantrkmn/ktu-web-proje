@@ -1,16 +1,26 @@
 <?php
+include 'header.php';
 
-session_start();
-ob_start(); 
+if (isset($_SESSION['k_ad']))
+ {
 
-include '../../baglan.php';
+$kul_id = $kullanicicek['k_id'];
 
-$kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
-$kullanicisor->execute(array(
-'email'=>$_SESSION['k_ad']
-));
-$say=$kullanicisor->rowCount();
-$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+
+$dersprogramisor=$db->prepare("SELECT * FROM ders where k_id=:kul_id ");
+
+  $dersprogramisor->execute(array(
+    'kul_id'=>$kul_id ));
+
+  $dersprogramicek=$dersprogramisor->fetch(PDO::FETCH_ASSOC);
+
+
+  
+ 
+}
+
+
+
 
 
 
@@ -78,15 +88,15 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
                     <div class="menu_section">
                       <h3>General</h3>
                       <ul class="nav side-menu">
-                        <li><a href="duyuru.html"><i class="fa fa-home"></i> duyuru <span class="fa fa-chevron-down"></span></a>
+                        <li><a href="duyuru.php"><i class="fa fa-home"></i> duyuru <span class="fa fa-chevron-down"></span></a>
                         </li>
-                        <li><a href="video.html"><i class="fa fa-home"></i> video <span class="fa fa-chevron-down"></span></a>
+                        <li><a href="video.php"><i class="fa fa-home"></i> video <span class="fa fa-chevron-down"></span></a>
                         </li>
-                        <li><a href="etkinlik.html"><i class="fa fa-home"></i> etkinlik <span class="fa fa-chevron-down"></span></a>
+                        <li><a href="etkinlik.php"><i class="fa fa-home"></i> etkinlik <span class="fa fa-chevron-down"></span></a>
                         </li>
                         <li><a href="dersprogrami.php"><i class="fa fa-home"></i> ders <span class="fa fa-chevron-down"></span></a>
                         </li>
-                        <li><a href="resim.html"><i class="fa fa-home"></i> resim <span class="fa fa-chevron-down"></span></a>
+                        <li><a href="resim.php"><i class="fa fa-home"></i> resim <span class="fa fa-chevron-down"></span></a>
                         </li>
                       </ul>
                     </div>
@@ -175,8 +185,8 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 
                       <tbody>
                         <tr>
-                          <td>Tiger Nixon</td>
-                          <td><a href="#">sil</a></td>
+                          <td><?php echo $dersprogramicek['img'] ?></td>
+                          <td><a href="../../islem.php?derssil=ok&kullanici_id=<?php echo $dersprogramicek['k_id'] ?>&ders_id=<?php echo $dersprogramicek['ders_id'] ?>"><button class="btn btn-secondary">sil</button></a></td>
 
                         </tr>
                       </tbody>
@@ -185,7 +195,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
                 </div>
               </div>
             </div>
-            <a href="ekleders.html">yeni ekle</a>
+            <a href="ekleders.php">yeni ekle</a>
           </div>
         </div>
         <!-- /page content -->

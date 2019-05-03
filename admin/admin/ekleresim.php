@@ -1,3 +1,4 @@
+<?php  include 'header.php';?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,6 +24,7 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -45,8 +47,8 @@
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Welcome  <a href="../../cikis.php"> <i class="fas fa-sign-out-alt"></i></a> </span>
+                <h2> <?php echo $kullanicicek['k_ad'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -146,12 +148,19 @@
                                 <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
             
                                   <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">pdf linki <span class="required">*</span>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">resim  <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                      <input type="file" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
                                     </div>
                                   </div>
+                                  <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">açıklama  <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                      </div>
                                   
                                 
                                  
