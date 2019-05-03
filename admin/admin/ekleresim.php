@@ -49,6 +49,8 @@
               <div class="profile_info">
                 <span>Welcome  <a href="../../cikis.php"> <i class="fas fa-sign-out-alt"></i></a> </span>
                 <h2> <?php echo $kullanicicek['k_ad'] ?></h2>
+                <span>Welcome,</span>
+                <h2>John Doe</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->

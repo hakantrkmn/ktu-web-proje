@@ -1,4 +1,5 @@
 <?php  include 'header.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,6 +27,7 @@
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
+
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -49,6 +51,8 @@
               <div class="profile_info">
                 <span>Welcome  <a href="../../cikis.php"> <i class="fas fa-sign-out-alt"></i></a> </span>
                 <h2> <?php echo $kullanicicek['k_ad'] ?></h2>
+                <span>Welcome,</span>
+                <h2>John Doe</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
