@@ -1,3 +1,5 @@
+<?php  include 'header.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,6 +25,8 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+ 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -45,6 +49,9 @@
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
+                <span>Welcome  <a href="../../cikis.php"> <i class="fas fa-sign-out-alt"></i></a> </span>
+                <h2>  <?php echo $kullanicicek['k_ad'] ?></h2>
+
                 <span>Welcome,</span>
                 <h2>John Doe</h2>
               </div>
@@ -58,6 +65,16 @@
                     <div class="menu_section">
                       <h3>General</h3>
                       <ul class="nav side-menu">
+                        <li><a href="duyuru.php"><i class="fa fa-home"></i> duyuru <span class="fa fa-chevron-down"></span></a>
+                        </li>
+                        <li><a href="video.php"><i class="fa fa-home"></i> video <span class="fa fa-chevron-down"></span></a>
+                        </li>
+                        <li><a href="etkinlik.php"><i class="fa fa-home"></i> etkinlik <span class="fa fa-chevron-down"></span></a>
+                        </li>
+                        <li><a href="dersprogrami.php"><i class="fa fa-home"></i> ders <span class="fa fa-chevron-down"></span></a>
+                        </li>
+                        <li><a href="resim.php"><i class="fa fa-home"></i> resim <span class="fa fa-chevron-down"></span></a>
+
                         <li><a href="duyuru.html"><i class="fa fa-home"></i> duyuru <span class="fa fa-chevron-down"></span></a>
                         </li>
                         <li><a href="video.html"><i class="fa fa-home"></i> video <span class="fa fa-chevron-down"></span></a>
@@ -173,6 +190,8 @@
                 </div>
               </div>
             </div>
+ 
+            <a href="eklevideo.php">yeni ekle</a>
             <a href="eklevideo.html">yeni ekle</a>
           </div>
         </div>
