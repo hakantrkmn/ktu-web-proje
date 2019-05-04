@@ -42,13 +42,13 @@ include 'header.php';?>
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a href="#"><i class="fa fa-home"></i> duyuru <span class="fa fa-chevron-down"></span></a>
+                <li><a href="duyuru.php"><i class="fa fa-home"></i> duyuru <span class="fa fa-chevron-down"></span></a>
                 </li>
-                <li><a href="#"><i class="fa fa-home"></i> video <span class="fa fa-chevron-down"></span></a>
+                <li><a href="video.php"><i class="fa fa-home"></i> video <span class="fa fa-chevron-down"></span></a>
                 </li>
-                <li><a href="#"><i class="fa fa-home"></i> etkinlik <span class="fa fa-chevron-down"></span></a>
+                <li><a href="etkinlik.php"><i class="fa fa-home"></i> etkinlik <span class="fa fa-chevron-down"></span></a>
                 </li>
-                <li><a href="#"><i class="fa fa-home"></i> ders <span class="fa fa-chevron-down"></span></a>
+                <li><a href="ders.php"><i class="fa fa-home"></i> ders <span class="fa fa-chevron-down"></span></a>
                 </li>
               </ul>
             </div>

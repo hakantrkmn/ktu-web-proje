@@ -8,16 +8,34 @@ if (isset($_SESSION['k_ad']))
     
   $kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
 $kullanicisor->execute(array(
-'email'=>$_SESSION['k_ad']
-));
+'email'=>$_SESSION['k_ad']));
 $say=$kullanicisor->rowCount();
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
   $kul_id = $kullanicicek['k_id'];
 
+  $resimsor=$db->prepare("SELECT * FROM resim where k_id=:kul_id");
+
+  $resimsor->execute(array('kul_id'=>$kul_id ));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   $duyurusor=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id");
 
   $duyurusor->execute(array('kul_id'=>$kul_id ));
-}
+
+
 include 'header.php';?>
 
 
@@ -151,18 +169,17 @@ include 'header.php';?>
 
 
                       <tbody>
+
+                      	<?php while ($resimcek=$resimsor->fetch(PDO::FETCH_ASSOC)) { ?>
                         <tr>
-                          <td>Tiger Nixon</td>
-                          <td>Tiger Nixon</td>
-                          <td><a href="#">sil</a></td>
+                          <td> <?php echo $resimcek['resim'] ?></td>
+                          <td><?php echo $resimcek['aciklama'] ?></td>
+                          <td> <a href="../../islem.php?kullanici_id=<?php echo $resimcek['k_id'];?>&resimsil=ok&id=<?php echo $resimcek['resim_id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
 
                         </tr>
-                        <tr>
-                          <td>Garrett Winters</td>
-                          <td>Tiger Nixon</td>
-                          <td><a href="#">sil</a></td>
 
-                        </tr>
+                    <?php } ?>
+                       
                       </tbody>
                     </table>
                   </div>

@@ -136,6 +136,86 @@ if (($_GET['derssil']=="ok"))
 }
 
 
+if (isset($_POST['resimyukle'])) 
+{
+	# code...
+
+
+$yukleklasor="./admin/admin/resim/";
+$tmp_name = $_FILES['yukle_resim']['tmp_name'];
+$name=$_FILES['yukle_resim']['name'];
+$boyut =$_FILES['yukle_resim']['size'];
+$tip=$_FILES['yukle_resim']['type'];
+$uzanti = substr($name, -4,4);
+$rand1=rand(10000,50000);
+$rand2=rand(10000,50000);
+$resimad=$rand1.$rand2.$uzanti;
+
+
+//dosya varmı control 
+
+if (strlen($name)==0) {
+	echo "Bir dosya seçiniz";
+	exit();
+	# code...
+}
+
+//boyut control
+if ($boyut>(1024*1024*3)) {
+	echo "Dosya boyutu çok fazla";
+	exit();
+	# code...
+}
+
+
+//tip kontrol
+
+if ($tip != 'image/jpeg' && $tip!= 'image/png' && $uzanti!='.jpg') {
+
+	echo "Yalnızca jpeg veya png formatında olabilir";
+	# code...
+}
+
+move_uploaded_file($tmp_name, "$yukleklasor/$resimad");
+
+
+$resimsor=$db->prepare("INSERT INTO resim SET resim=:resimbilgi , aciklama=:aciklamabilgi, k_id=:kul_id");
+$resimcek=$resimsor->execute(array('resimbilgi' => $resimad , 'aciklamabilgi'=>$_POST['aciklama'] , 'kul_id'=>$_POST['kullanici_id']));
+if ($resimcek) {
+	header("Location:./admin/admin/resim.php");
+	# code...
+}
+}
+
+
+if (isset($_GET['resimsil']) and ($_GET['resimsil']=="ok")) 
+{
+   
+
+
+
+    $sil=$db->prepare("DELETE  FROM resim WHERE  resim_id=:r_id");
+
+    $control=$sil->execute(array('r_id'=>$_GET['id'] ));
+
+    if ($control) {
+
+        header("Location:./admin/admin/resim.php?durum=ok");
+
+
+        # code...
+    }
+    
+
+}
+
+
+
+    
+
+		
+
+
 
 
 
