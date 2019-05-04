@@ -181,6 +181,10 @@ move_uploaded_file($tmp_name, "$yukleklasor/$resimad");
 
 $resimsor=$db->prepare("INSERT INTO resim SET resim=:resimbilgi , aciklama=:aciklamabilgi, k_id=:kul_id");
 $resimcek=$resimsor->execute(array('resimbilgi' => $resimad , 'aciklamabilgi'=>$_POST['aciklama'] , 'kul_id'=>$_POST['kullanici_id']));
+if ($resimcek) {
+	header("Location:./admin/admin/resim.php");
+	# code...
+}
 }
 
 
