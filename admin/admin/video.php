@@ -7,11 +7,15 @@ if (isset($_SESSION['k_ad']))
 {    
 $kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
 $kullanicisor->execute(array('email'=>$_SESSION['k_ad']));
-$say=$kullanicisor->rowCount();
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 $kul_id = $kullanicicek['k_id'];
-$duyurusor=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id");
-$duyurusor->execute(array('kul_id'=>$kul_id ));
+$video=$db->prepare("SELECT * FROM video where k_id=:kul_id");
+$video->execute(array('kul_id'=>$kul_id ));
+$video=$video->fetchAll(PDO::FETCH_OBJ);
+}
+else
+{
+  header("Location:../../login.php");
 }
 
 include 'header.php';?>
@@ -146,17 +150,12 @@ include 'header.php';?>
 
 
                       <tbody>
+                        <?php foreach ($video as $video): ?>
                         <tr>
-                          <td>Tiger Nixon</td>
-                          <td>Tiger Nixon</td>
-                          <td><a href="#">sil</a></td>
-
-                        </tr>
-                        <tr>
-                          <td>Garrett Winters</td>
-                          <td>Tiger Nixon</td>
-                          <td><a href="#">sil</a></td>
-
+                          <td> <?php echo $video->aciklama ?> </td>
+                          <td><?php echo $video->link ?> </td>
+                          <td><a  href="../../islem.php?kullanici_id=<?php echo $video->k_id;?>&videosil=ok&id=<?php echo $video->id; ?>">sil</a></td>
+                        <?php endforeach ?>
                         </tr>
                       </tbody>
                     </table>
@@ -166,7 +165,6 @@ include 'header.php';?>
             </div>
  
             <a href="eklevideo.php">yeni ekle</a>
-            <a href="eklevideo.html">yeni ekle</a>
           </div>
         </div>
         <!-- /page content -->
