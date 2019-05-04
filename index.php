@@ -20,6 +20,7 @@ if (isset($_GET['bolum'])) {
   $etkinlik->execute(array('kul_id'=>$kid->k_id ));
   $etkinlik=$etkinlik->fetchAll(PDO::FETCH_OBJ);
 
+
   $resim=$db->prepare("SELECT * FROM resim where k_id=:kul_id");
   $resimcek=$resim->execute(array('kul_id' =>$kid->k_id ));
   
@@ -27,6 +28,8 @@ if (isset($_GET['bolum'])) {
 
 
 }
+
+
 
 
 
@@ -166,6 +169,34 @@ if (isset($_GET['bolum'])) {
           </div>    
         </div>
         <!-- ETKİNLİKLER -->
+<!-- ETKİNLİKLER -->
+    <div>
+      <div style="text-align:center">
+        <span style="font-family: 'Merriweather', serif;font-size: -webkit-xxx-large;">Etkinlikler</span>
+      </div>
+      <div style="text-align: center;margin-top: 15px" id="events">
+          <ol style="list-style: none;padding: 0;word-break: break-all">
+          <?php foreach ($etkinlik as $etkinlik): ?>
+                    <li> <?php echo $etkinlik->etkinlik ?> </li>
+          <?php endforeach; ?>
+          </ol>
+      </div>    
+    </div>
+<!-- ETKİNLİKLER -->
+
+        </div>
+  <div class="col-md-5">
+<!-- DERS PROGRAMI -->
+      <div style="text-align:center">
+          <span style="font-family: 'Merriweather', serif;font-size: -webkit-xxx-large;">Ders Programı</span>
+      <iframe src="http://www.ktu.edu.tr/dosyalar/bilgisayar_1fd3b.pdf" style="width:100%; height:200px;" frameborder="0"></iframe>
+      </div>
+<!-- DERS PROGRAMI -->
+<!-- KAYAN DUYURULAR -->
+<div>
+    <div class="card">
+      <div class="card-body">
+        <marquee behavior="scroll" direction="left"> <?php echo $yazi ?></marquee>
 
       </div>
       <div class="col-md-5">

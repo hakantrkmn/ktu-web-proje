@@ -8,8 +8,7 @@ if (isset($_SESSION['k_ad']))
     
   $kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
 $kullanicisor->execute(array(
-'email'=>$_SESSION['k_ad']
-));
+'email'=>$_SESSION['k_ad']));
 $say=$kullanicisor->rowCount();
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
   $kul_id = $kullanicicek['k_id'];
@@ -29,6 +28,12 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 
 
 
+
+
+
+  $duyurusor=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id");
+
+  $duyurusor->execute(array('kul_id'=>$kul_id ));
 
 
 include 'header.php';?>
