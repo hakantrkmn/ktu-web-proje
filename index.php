@@ -20,31 +20,17 @@ if (isset($_GET['bolum'])) {
   $etkinlik->execute(array('kul_id'=>$kid->k_id ));
   $etkinlik=$etkinlik->fetchAll(PDO::FETCH_OBJ);
 
-
   $resim=$db->prepare("SELECT * FROM resim where k_id=:kul_id");
   $resimcek=$resim->execute(array('kul_id' =>$kid->k_id ));
-  
 
+  $video=$db->prepare("SELECT * FROM video where k_id=:kul_id");
+  $video->execute(array('kul_id' =>$kid->k_id ));
+  $video=$video->fetchAll(PDO::FETCH_OBJ);
 
-
+  $dersprogrami=$db->prepare("SELECT * FROM ders where k_id=:kul_id");
+  $dersprogrami->execute(array('kul_id' =>$kid->k_id ));
+  $dersprogrami=$dersprogrami->fetch(PDO::FETCH_OBJ);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -81,67 +67,58 @@ if (isset($_GET['bolum'])) {
 
 
 <body>
+  <input type="hidden" id="bolum" value="<?php echo $_GET['bolum'] ?>">
   <div style="margin-top:50px" class="container">
     <div class="row">
+      <div class="col-md-12">
+                <!-- KAYAN DUYURULAR -->
+        <div>
+          <div class="card">
+            <div class="card-body">
+               <input class="duyuru" type="hidden" name="" value="<?php echo end($duyurular)->duyuru ?>">
+              <marquee id="duyuru" behavior="scroll" direction="left"> <?php echo $yazi ?></marquee>
+            </div>
+          </div>
+        </div>
+        <!-- KAYAN DUYURULAR -->
+      </div>
+    </div>
+    <div style="margin-top:50px" class="row">
       <div class="col-md-7">
-
         <!-- video carousel -->
         <div id="video-carousel-example2" class="carousel slide carousel-fade" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#video-carousel-example2" data-slide-to="0" class="active"></li>
-            <li data-target="#video-carousel-example2" data-slide-to="1"></li>
-            <li data-target="#video-carousel-example2" data-slide-to="2"></li>
-          </ol>
-
-
           <div class="carousel-inner" role="listbox">
-
-
-
-            
-            <div class="carousel-item active">
+          <?php foreach ($video as  $video):?>
+            <div class="carousel-item">
               <div class="view">
                 <video class="video-fluid" autoplay loop muted>
-                  <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
+                  <source class="videolar" src="admin/admin/video/<?php echo $video->link ?>" type="video/mp4" />
                 </video>
               </div>
-
               <div class="carousel-caption">
                 <div class="animated fadeInDown">
-                  <h3 class="h3-responsive">Strong mask</h3>
-                  <p>Third text</p>
+                <p class="aciklama" ><?php echo  $video->aciklama ?></p>
                 </div>
               </div>
             </div>
-           
-
-
+            <?php endforeach ?>
             <!--RESİM BAŞLANGIÇ-->
             <?php while ($resimcek=$resim->fetch(PDO::FETCH_ASSOC)) {   ?>
               <div class="carousel-item">
                 <div class="view">
-                  <img class="d-block w-100" src="./admin/admin/resim/<?php echo  $resimcek['resim'] ?>"
+                  <img class="d-block w-100 olcu resim" src="admin/admin/resim/<?php echo  $resimcek['resim'] ?>"
                   alt="Second slide">
                 </div>
 
                 <div class="carousel-caption">
                   <div class="animated fadeInDown">
-                    <h3 class="h3-responsive">Super light mask</h3>
-                    <p>Secondary text</p>
+                    <p class="aciklama"><?php echo  $resimcek['aciklama'] ?></p>
                   </div>
                 </div>
               </div>
-
             <?php } ?>
-
             <!--RESİM SONU -->
-
-
-
-
-
           </div>
-
           <a class="carousel-control-prev" href="#video-carousel-example2" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
@@ -150,11 +127,8 @@ if (isset($_GET['bolum'])) {
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
-
         </div>
-
         <!-- video carousel -->
-
         <!-- ETKİNLİKLER -->
         <div>
           <div style="text-align:center">
@@ -162,60 +136,22 @@ if (isset($_GET['bolum'])) {
           </div>
           <div style="text-align: center;margin-top: 15px" id="events">
             <ol style="list-style: none;padding: 0;word-break: break-all">
+              <input id="etkinlik" type="hidden" name="" value="<?php echo end($etkinlik)->etkinlik  ?>">
               <?php foreach ($etkinlik as $etkinlik): ?>
-                <li> <?php echo $etkinlik->etkinlik ?> </li>
+                <li class="etkinlikler"> <?php echo $etkinlik->etkinlik ?> </li>
               <?php endforeach; ?>
             </ol>
           </div>    
         </div>
         <!-- ETKİNLİKLER -->
-<!-- ETKİNLİKLER -->
-    <div>
-      <div style="text-align:center">
-        <span style="font-family: 'Merriweather', serif;font-size: -webkit-xxx-large;">Etkinlikler</span>
-      </div>
-      <div style="text-align: center;margin-top: 15px" id="events">
-          <ol style="list-style: none;padding: 0;word-break: break-all">
-          <?php foreach ($etkinlik as $etkinlik): ?>
-                    <li> <?php echo $etkinlik->etkinlik ?> </li>
-          <?php endforeach; ?>
-          </ol>
-      </div>    
-    </div>
-<!-- ETKİNLİKLER -->
-
-        </div>
-  <div class="col-md-5">
-<!-- DERS PROGRAMI -->
-      <div style="text-align:center">
-          <span style="font-family: 'Merriweather', serif;font-size: -webkit-xxx-large;">Ders Programı</span>
-      <iframe src="http://www.ktu.edu.tr/dosyalar/bilgisayar_1fd3b.pdf" style="width:100%; height:200px;" frameborder="0"></iframe>
-      </div>
-<!-- DERS PROGRAMI -->
-<!-- KAYAN DUYURULAR -->
-<div>
-    <div class="card">
-      <div class="card-body">
-        <marquee behavior="scroll" direction="left"> <?php echo $yazi ?></marquee>
-
       </div>
       <div class="col-md-5">
         <!-- DERS PROGRAMI -->
         <div style="text-align:center">
           <span style="font-family: 'Merriweather', serif;font-size: -webkit-xxx-large;">Ders Programı</span>
-          <iframe src="http://www.ktu.edu.tr/dosyalar/bilgisayar_1fd3b.pdf" style="width:100%; height:200px;" frameborder="0"></iframe>
+          <iframe src="<?php echo $dersprogrami->img ?>" style="width:100%; height:200px;" frameborder="0"></iframe>
         </div>
         <!-- DERS PROGRAMI -->
-        <!-- KAYAN DUYURULAR -->
-        <div>
-          <div class="card">
-            <div class="card-body">
-              <marquee behavior="scroll" direction="left"> <?php echo $yazi ?></marquee>
-
-            </div>
-          </div>
-        </div>
-        <!-- KAYAN DUYURULAR -->
         <!-- HAVA DURUMU -->
         <div class="card sa">
           <div id="sehir" class="city">Eindhoven</div>
@@ -228,8 +164,6 @@ if (isset($_GET['bolum'])) {
         <!-- HAVA DURUMU -->
       </div>
     </div>
-
-
   </div>
 </body>
 </html>

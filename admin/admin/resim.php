@@ -17,23 +17,10 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 
   $resimsor->execute(array('kul_id'=>$kul_id ));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  $duyurusor=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id");
-
-  $duyurusor->execute(array('kul_id'=>$kul_id ));
+else
+{
+  header("Location:../../login.php");
+}
 
 
 include 'header.php';?>
@@ -172,7 +159,7 @@ include 'header.php';?>
 
                       	<?php while ($resimcek=$resimsor->fetch(PDO::FETCH_ASSOC)) { ?>
                         <tr>
-                          <td> <?php echo $resimcek['resim'] ?></td>
+                          <td> <img style="max-height:50px;max-weight:50px;" src="resim/<?php echo $resimcek['resim'] ?>" alt=""> </td>
                           <td><?php echo $resimcek['aciklama'] ?></td>
                           <td> <a href="../../islem.php?kullanici_id=<?php echo $resimcek['k_id'];?>&resimsil=ok&id=<?php echo $resimcek['resim_id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
 
@@ -188,7 +175,6 @@ include 'header.php';?>
             </div>
             <a href="ekleresim.php">yeni ekle</a>
 
-            <a href="ekleresim.html">yeni ekle</a>
           </div>
         </div>
         <!-- /page content -->

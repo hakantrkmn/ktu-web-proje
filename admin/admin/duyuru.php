@@ -9,15 +9,17 @@ include '../../baglan.php';
 
 
 if (isset($_SESSION['k_ad']))
-{
-    
-  $kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:ad");
+{    
+$kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:ad");
 $kullanicisor->execute(array('ad'=>$_SESSION['k_ad']));
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
-
 $kul_id = $kullanicicek['k_id'];
 $duyurusor=$db->prepare("SELECT * FROM duyuru where k_id=:kul_id ");
-  $duyurusor->execute(array('kul_id'=>$kul_id ));
+$duyurusor->execute(array('kul_id'=>$kul_id ));
+}
+else
+{
+  header("Location:../../login.php");
 }
 include 'header.php';
 

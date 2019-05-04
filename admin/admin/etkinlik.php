@@ -12,10 +12,12 @@ $kullanicisor->execute(array('email'=>$_SESSION['k_ad']));
 $say=$kullanicisor->rowCount();
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 $kul_id = $kullanicicek['k_id'];
-
   $duyurusor=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id");
-
   $duyurusor->execute(array('kul_id'=>$kul_id ));
+}
+else
+{
+  header("Location:../../login.php");
 }
 
 

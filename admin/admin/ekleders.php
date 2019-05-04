@@ -1,12 +1,17 @@
-<?php  include 'header.php';
-
-
-
-
-
-
-
-
+<?php  
+include '../../baglan.php';
+if (isset($_SESSION['k_ad']))
+{    
+$kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:ad");
+$kullanicisor->execute(array('ad'=>$_SESSION['k_ad']));
+$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+$kul_id = $kullanicicek['k_id'];
+}
+else
+{
+  header("Location:../../login.php");
+}
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,11 +161,11 @@
                   <br />
                   <div class="form-group">
                     <form action="../../islem.php" method="POST">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">duyuru <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ders programi <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="first-name" required=""  name="derslinki" class="form-control col-md-7 col-xs-12">
-                        <input  type="text" id="first-name" required="" value="<?php echo $kullanicicek['k_id'] ?>" name="kullanici_id" class="form-control col-md-7 col-xs-12">
+                        <input  type="hidden" id="first-name" required="" value="<?php echo $kullanicicek['k_id'] ?>" name="kullanici_id" class="form-control col-md-7 col-xs-12">
                         
                         
                         <button  name="dersprogramekle" type="submit" class="btn btn-success">ekle</button>
