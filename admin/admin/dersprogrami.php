@@ -13,10 +13,8 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 $kul_id = $kullanicicek['k_id'];
 $dersprogramisor=$db->prepare("SELECT * FROM ders where k_id=:kul_id ");
 $dersprogramisor->execute(array('kul_id'=>$kul_id ));
-
+$dersprogramicek=$dersprogramisor->fetchAll(PDO::FETCH_OBJ);
 }
-
-
 include 'header.php';
 
  ?>
@@ -48,16 +46,13 @@ include 'header.php';
 
 
                       <tbody>
-
-
-                        <?php while($dersprogramicek=$dersprogramisor->fetch(PDO::FETCH_ASSOC)) { ?>
+                        <?php foreach($dersprogramicek as $dersprogrami) :?>
                         <tr>
-                          <td><?php echo $dersprogramicek['img'] ?></td>
-                          <td><a  href="../../islem.php?derssil=ok&kullanici_id=<?php echo $dersprogramicek['k_id'] ?>&ders_id=<?php echo $dersprogramicek['ders_id'] ?>"><button class="btn btn-secondary">sil</button></a></td>
-                          <td>  <a href="dersprogrami-guncelle.php?ders_id=<?php echo $dersprogramicek['ders_id'];?>&dersguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
+                          <td><?php echo $dersprogrami->img ?></td>
+                          <td><a class="btn btn-danger" href="../../islem.php?derssil=ok&kullanici_id=<?php echo $dersprogrami->k_id ?>&ders_id=<?php echo $dersprogrami->ders_id ?>"><button class="btn btn-secondary">sil</button></a></td>
 
                         </tr>
-                        <?php } ?>
+                        <?php endforeach ?>
                       </tbody>
                     </table>
                   </div>

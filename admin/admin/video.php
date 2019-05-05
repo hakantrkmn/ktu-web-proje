@@ -11,7 +11,6 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 $kul_id = $kullanicicek['k_id'];
 $video=$db->prepare("SELECT * FROM video where k_id=:kul_id");
 $video->execute(array('kul_id'=>$kul_id ));
-
 }
 else
 {
