@@ -5,9 +5,6 @@
 
 include '../../baglan.php';
 
-
-
-
 if (isset($_SESSION['k_ad']))
 {    
 $kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:ad");
@@ -28,9 +25,7 @@ include 'header.php';
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="">
-
           <div class="clearfix"></div>
-
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -53,26 +48,14 @@ include 'header.php';
                         <th>Düzenle</th>
                       </tr>
                     </thead>
-
-
                     <tbody>
-                      
                       <?php while ($duyurucek=$duyurusor->fetch(PDO::FETCH_ASSOC)) { ?>
-                        
-                      
                       <tr>
                         <td>  <?php echo $duyurucek['duyuru'] ?> </td>
                         <td> <a class="" href="../../islem.php?kullanici_id=<?php echo $duyurucek['k_id'];?>&duyurusil=ok&id=<?php echo $duyurucek['id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
                          <td>  <a href="duyuru-guncelle.php?duyuru_id=<?php echo $duyurucek['id'];?>&duyuruguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
-
                       </tr>
-
                       <?php } ?>
-
-
-
-
-                      
                     </tbody>
                   </table>
                 </div>
@@ -86,7 +69,6 @@ include 'header.php';
         </div>
       </div>
       <!-- /page content -->
-
       <!-- footer content -->
       <footer>
         <div class="pull-right">

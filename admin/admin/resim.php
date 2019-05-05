@@ -5,16 +5,12 @@ include '../../baglan.php';
 
 if (isset($_SESSION['k_ad']))
 {
-    
   $kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
-$kullanicisor->execute(array(
-'email'=>$_SESSION['k_ad']));
+$kullanicisor->execute(array('email'=>$_SESSION['k_ad']));
 $say=$kullanicisor->rowCount();
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
   $kul_id = $kullanicicek['k_id'];
-
   $resimsor=$db->prepare("SELECT * FROM resim where k_id=:kul_id");
-
   $resimsor->execute(array('kul_id'=>$kul_id ));
 }
 else
@@ -24,16 +20,10 @@ else
 
 
 include 'header.php';?>
-
-
-
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-           
-
             <div class="clearfix"></div>
-
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -42,7 +32,6 @@ include 'header.php';?>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
@@ -58,21 +47,15 @@ include 'header.php';?>
                           <th>Düzenle</th>
                         </tr>
                       </thead>
-
-
                       <tbody>
-
                       	<?php while ($resimcek=$resimsor->fetch(PDO::FETCH_ASSOC)) { ?>
                         <tr>
                           <td> <img style="max-height:50px;max-weight:50px;" src="resim/<?php echo $resimcek['resim'] ?>" alt=""> </td>
                           <td><?php echo $resimcek['aciklama'] ?></td>
                           <td> <a href="../../islem.php?kullanici_id=<?php echo $resimcek['k_id'];?>&resimsil=ok&id=<?php echo $resimcek['resim_id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
                           <td>  <a href="resim-guncelle.php?resim_id=<?php echo $resimcek['resim_id'];?>&resimguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
-
                         </tr>
-
                     <?php } ?>
-                       
                       </tbody>
                     </table>
                   </div>

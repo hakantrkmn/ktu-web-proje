@@ -25,7 +25,15 @@ if (isset($_POST['duyuru']) and $_POST['duyuru']==1) {
      
 
 }
+if (isset($_POST['ders']) and $_POST['ders']==1) {
+    $duyurular=$db->prepare("SELECT * FROM ders where k_id=:kid order by ders_id desc ");
+    $duyurular->execute(array('kid'=>$kid));
+    $duyurular=$duyurular->fetch(PDO::FETCH_OBJ);
+   $duyuru = json_encode($duyurular);
+   echo $duyuru;
+    
 
+}
 
 if (isset($_POST['etkinlik']) and $_POST['etkinlik']==1) {
     $duyurular=$db->prepare("SELECT * FROM etkinlik where k_id=:kid order by id desc ");

@@ -154,7 +154,7 @@ if (isset($_GET['bolum'])) {
         <!-- DERS PROGRAMI -->
         <div style="text-align:center">
           <span style="font-family: 'Merriweather', serif;font-size: -webkit-xxx-large;">Ders Programı</span>
-          <iframe src="<?php echo $dersprogrami->img ?>" style="width:100%; height:200px;" frameborder="0"></iframe>
+          <iframe id="dersprg" src="<?php echo $dersprogrami->img ?>" style="width:100%; height:200px;" frameborder="0"></iframe>
         </div>
         <!-- DERS PROGRAMI -->
         <!-- HAVA DURUMU -->

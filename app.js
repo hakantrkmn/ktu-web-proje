@@ -94,6 +94,28 @@ $(document).ready(function() {
                         alert(thrownError);
                   }
             });
+            $.ajax({
+                  type:'POST',
+                  url:'api.php',
+                  dataType: "json",
+                  data:{ders:"1",bolum:bolum},
+                  success:function(result){
+                        if(result.img==$("#dersprg").attr("src"))
+                        {
+                        }
+                        else
+                        {
+                              console.log("sa")
+                              $("#dersprg").attr("src",result.img)      
+      
+                        }
+
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                  }
+            });
         },1000);
       //   DUYURULAR GÜNCELLEME 
 

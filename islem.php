@@ -177,40 +177,26 @@ if (isset($_POST['duyuru-guncelle']))
 //Ders programı guncelleme
 if (isset($_POST['dersprogrami-guncelle']))
  {
-
     $ders_id=$_POST['ders_id'];
-    
     //Tablo Güncelleme İşlemi 
-	$duyurusor=$db->prepare("UPDATE ders SET
-    img=:a 
-    
-    WHERE ders_id={$_POST['ders_id']} ");
-
-    $update=$duyurusor->execute(array(
-    'a'=>$_POST['img']
-    ));
+	$duyurusor=$db->prepare("UPDATE ders SET img=:a WHERE ders_id={$_POST['ders_id']} ");
+    $update=$duyurusor->execute(array('a'=>$_POST['img']));
     if ($update) 
     {
     	header("Location:./admin/admin/dersprogrami.php?durum=ok");
     }
-    else header("Location:./admin/admin/dersprogrami-guncelle.php?durum=no");
-	
+    else
+    {
+        header("Location:./admin/admin/dersprogrami-guncelle.php?durum=no");	
+    } 
 }
 //Etkinlik Güncelleme
 if (isset($_POST['etkinlik-guncelle']))
  {
-
-    $etkinlik_id=$_POST['etkinlik_id'];
-    
+    $etkinlik_id=$_POST['etkinlik_id'];    
     //Tablo Güncelleme İşlemi 
-	$etkinliksor=$db->prepare("UPDATE etkinlik SET
-    etkinlik=:a 
-    
-    WHERE id={$_POST['etkinlik_id']} ");
-
-    $update=$etkinliksor->execute(array(
-    'a'=>$_POST['etkinlik']
-    ));
+	$etkinliksor=$db->prepare("UPDATE etkinlik SET etkinlik=:a WHERE id={$_POST['etkinlik_id']} ");
+    $update=$etkinliksor->execute(array('a'=>$_POST['etkinlik']));
     if ($update) 
     {
     	header("Location:./admin/admin/etkinlik.php?durum=ok");
@@ -221,18 +207,10 @@ if (isset($_POST['etkinlik-guncelle']))
 //Resim Açıklama Güncelleme
 if (isset($_POST['resim-guncelle']))
  {
-
-    $resim_id=$_POST['resim_id'];
-    
+    $resim_id=$_POST['resim_id'];  
     //Tablo Güncelleme İşlemi 
-	$resimsor=$db->prepare("UPDATE resim SET
-    aciklama=:a 
-    
-    WHERE resim_id={$_POST['resim_id']} ");
-
-    $update=$resimsor->execute(array(
-    'a'=>$_POST['aciklama']
-    ));
+	$resimsor=$db->prepare("UPDATE resim SET aciklama=:a WHERE resim_id={$_POST['resim_id']} ");
+    $update=$resimsor->execute(array('a'=>$_POST['aciklama']));
     if ($update) 
     {
     	header("Location:./admin/admin/resim.php?durum=ok");
@@ -243,40 +221,15 @@ if (isset($_POST['resim-guncelle']))
 //Video Açıklama Güncelleme
 if (isset($_POST['video-guncelle']))
  {
-
     $video_id=$_POST['video_id'];
-    
     //Tablo Güncelleme İşlemi 
-	$videosor=$db->prepare("UPDATE video SET
-    aciklama=:a 
-    
-    WHERE id={$_POST['video_id']} ");
-
-    $update=$videosor->execute(array(
-    'a'=>$_POST['aciklama']
-    ));
+	$videosor=$db->prepare("UPDATE video SET aciklama=:a   WHERE id={$_POST['video_id']} ");
+    $update=$videosor->execute(array('a'=>$_POST['aciklama']));
     if ($update) 
     {
     	header("Location:./admin/admin/video.php?durum=ok");
     }
     else header("Location:./admin/admin/video-guncelle.php?durum=no");
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  ?>

@@ -6,7 +6,7 @@ ob_start();
 
 try {
 	//Veri tabanına baglanmak icin 
-	$db= new PDO("mysql:host=localhost;dbname=newproje;charset=utf8",'root','12345678');	
+	$db= new PDO("mysql:host=localhost;dbname=proje;charset=utf8",'root','');	
 	//  echo "Veri tabani baglantisi basarili";
 }
 

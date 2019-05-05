@@ -2,8 +2,6 @@
 // bağlan phpde session dursun headerin içinde bişe olmasın her yere bağlan phpyi eklersin
 
 include '../../baglan.php';
-
-
 if (isset($_SESSION['k_ad']))
 {    
 $kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
@@ -16,22 +14,17 @@ $dersprogramisor->execute(array('kul_id'=>$kul_id ));
 $dersprogramicek=$dersprogramisor->fetchAll(PDO::FETCH_OBJ);
 }
 include 'header.php';
-
  ?>
 
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-
-
             <div class="clearfix"></div>
-
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Ders Programı</h2>
-
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -43,14 +36,12 @@ include 'header.php';
                           <th>Düzenle</th>
                         </tr>
                       </thead>
-
-
                       <tbody>
                         <?php foreach($dersprogramicek as $dersprogrami) :?>
                         <tr>
-                          <td><?php echo $dersprogrami->img ?></td>
-                          <td><a class="btn btn-danger" href="../../islem.php?derssil=ok&kullanici_id=<?php echo $dersprogrami->k_id ?>&ders_id=<?php echo $dersprogrami->ders_id ?>"><button class="btn btn-secondary">sil</button></a></td>
-
+                          <td> <a target="_blank" href=" <?php echo $dersprogrami->img ?>"> <?php echo $dersprogrami->img ?></a></td>
+                          <td><a class="" href="../../islem.php?derssil=ok&kullanici_id=<?php echo $dersprogrami->k_id ?>&ders_id=<?php echo $dersprogrami->ders_id ?>"><button class="btn btn-secondary">sil</button></a></td>
+                          <td>  <a href="dersprogrami-guncelle.php?ders_id=<?php echo $dersprogrami->k_id;?>&dersguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
                         </tr>
                         <?php endforeach ?>
                       </tbody>
@@ -62,11 +53,9 @@ include 'header.php';
                 </div>
               </div>
             </div>
-
           </div>
         </div>
         <!-- /page content -->
-
         <!-- footer content -->
         <footer>
           <div class="pull-right">

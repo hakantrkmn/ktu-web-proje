@@ -19,13 +19,8 @@ if (isset($_SESSION['k_ad']))
 
 if (isset($_GET['ders_id']) and ($_GET['dersguncelle']=="ok") )
 {
-                
-                  
 $derssor=$db->prepare("SELECT * FROM ders WHERE ders_id=:d_id ");
-$derssor->execute(array(
-'d_id'=>($_GET['ders_id'])
-));
-
+$derssor->execute(array('d_id'=>($_GET['ders_id'])));
 $dersprogramicek=$derssor->fetch(PDO::FETCH_ASSOC);
 }
 
@@ -38,17 +33,14 @@ include 'header.php';
 <div class="right_col" role="main">
   <div class="">
 
-
     <div class="clearfix"></div>
 
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <form action="../../islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-            <input type="hidden" name="kullanici_id" value="<?php echo $kullanicicek['kullanici_id'] ?>">
+            <input type="hidden" name="kullanici_id" value="<?php echo $kullanicicek['k_id'] ?>">
             <div class="form-group">
-
               <div style="display: none;" class="col-md-6 col-sm-6 col-xs-12">
                 <input   type="text" id="first-name" name="ders_id" 
                 value="<?php echo $dersprogramicek['ders_id'] ?> " required="required" class="form-control col-md-7 col-xs-12">
@@ -65,13 +57,10 @@ include 'header.php';
             <div class="ln_solid"></div>
             <div class="form-group">
               <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-
                <button type="submit"  name="dersprogrami-guncelle" class="btn btn-success">Güncelle </button>
              </div>
            </div>
-
          </form>
-
       </div>
               </div>
             </div>
@@ -80,7 +69,6 @@ include 'header.php';
         </div>
       </div>
       <!-- /page content -->
-
       <!-- footer content -->
       <footer>
         <div class="pull-right">
@@ -91,7 +79,6 @@ include 'header.php';
       <!-- /footer content -->
     </div>
   </div>
-
   <!-- jQuery -->
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap -->
@@ -118,7 +105,6 @@ include 'header.php';
   <script src="../vendors/jszip/dist/jszip.min.js"></script>
   <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
 

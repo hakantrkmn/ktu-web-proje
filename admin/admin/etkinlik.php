@@ -19,21 +19,13 @@ else
 {
   header("Location:../../login.php");
 }
-
-
-
 include 'header.php';
 
 ?>
-
-
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="">
-         
-
           <div class="clearfix"></div>
-
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -42,7 +34,6 @@ include 'header.php';
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                   
                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                     </li>
                   </ul>
@@ -57,26 +48,14 @@ include 'header.php';
                         <th>Düzenle</th>
                       </tr>
                     </thead>
-
-
                     <tbody>
-                      
                       <?php while ($etkinlikcek=$etkinliksor->fetch(PDO::FETCH_ASSOC)) { ?>
-                        
-                        
                         <tr>
                           <td>  <?php echo $etkinlikcek['etkinlik'] ?> </td>
-                          <td> <a href="../../islem.php?kullanici_id=<?php echo $etkinlikcek['k_id'];?>&etkinliksil=ok&id=<?php echo $duyurucek['id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
+                          <td> <a href="../../islem.php?kullanici_id=<?php echo $etkinlikcek['k_id'];?>&etkinliksil=ok&id=<?php echo $etkinlikcek['id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
                           <td>  <a href="etkinlik-guncelle.php?etkinlik_id=<?php echo $etkinlikcek['id'];?>&etkinlikguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
-
                         </tr>
-
                       <?php } ?>
-
-
-
-
-                      
                     </tbody>
                   </table>
                 </div>
@@ -86,7 +65,6 @@ include 'header.php';
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <!-- /page content -->
