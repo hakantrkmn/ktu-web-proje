@@ -50,6 +50,7 @@ include 'header.php';
                       <tr>
                         <th>Duyuru</th>
                         <th>Sil</th>
+                        <th>Düzenle</th>
                       </tr>
                     </thead>
 
@@ -62,6 +63,7 @@ include 'header.php';
                       <tr>
                         <td>  <?php echo $duyurucek['duyuru'] ?> </td>
                         <td> <a class="" href="../../islem.php?kullanici_id=<?php echo $duyurucek['k_id'];?>&duyurusil=ok&id=<?php echo $duyurucek['id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
+                         <td>  <a href="duyuru-guncelle.php?duyuru_id=<?php echo $duyurucek['id'];?>&duyuruguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
 
                       </tr>
 

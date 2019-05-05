@@ -12,13 +12,14 @@ $kullanicisor->execute(array('email'=>$_SESSION['k_ad']));
 $say=$kullanicisor->rowCount();
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 $kul_id = $kullanicicek['k_id'];
-  $duyurusor=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id");
-  $duyurusor->execute(array('kul_id'=>$kul_id ));
+  $etkinliksor=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id");
+  $etkinliksor->execute(array('kul_id'=>$kul_id ));
 }
 else
 {
   header("Location:../../login.php");
 }
+
 
 
 include 'header.php';
@@ -53,18 +54,20 @@ include 'header.php';
                       <tr>
                         <th>Etkinlik</th>
                         <th>Sil</th>
+                        <th>Düzenle</th>
                       </tr>
                     </thead>
 
 
                     <tbody>
                       
-                      <?php while ($duyurucek=$duyurusor->fetch(PDO::FETCH_ASSOC)) { ?>
+                      <?php while ($etkinlikcek=$etkinliksor->fetch(PDO::FETCH_ASSOC)) { ?>
                         
                         
                         <tr>
-                          <td>  <?php echo $duyurucek['etkinlik'] ?> </td>
-                          <td> <a href="../../islem.php?kullanici_id=<?php echo $duyurucek['k_id'];?>&etkinliksil=ok&id=<?php echo $duyurucek['id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
+                          <td>  <?php echo $etkinlikcek['etkinlik'] ?> </td>
+                          <td> <a href="../../islem.php?kullanici_id=<?php echo $etkinlikcek['k_id'];?>&etkinliksil=ok&id=<?php echo $duyurucek['id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
+                          <td>  <a href="etkinlik-guncelle.php?etkinlik_id=<?php echo $etkinlikcek['id'];?>&etkinlikguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
 
                         </tr>
 

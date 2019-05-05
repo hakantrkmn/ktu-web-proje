@@ -152,5 +152,131 @@ if (isset($_GET['resimsil']) and ($_GET['resimsil']=="ok"))
         header("Location:./admin/admin/resim.php?durum=ok");
     }
 }
+//duyuru güncelleme
+if (isset($_POST['duyuru-guncelle']))
+ {
+
+    $duyuru_id=$_POST['duyuru_id'];
+    
+    
+	$duyurusor=$db->prepare("UPDATE duyuru SET
+    duyuru=:a 
+    
+    WHERE id={$_POST['duyuru_id']} ");
+
+    $update=$duyurusor->execute(array(
+    'a'=>$_POST['duyuru']
+    ));
+    if ($update) 
+    {
+    	header("Location:./admin/admin/duyuru.php?durum=ok");
+    }
+    else header("Location:./admin/admin/duyuru-guncelle.php?durum=no");
+	
+}
+//Ders programı guncelleme
+if (isset($_POST['dersprogrami-guncelle']))
+ {
+
+    $ders_id=$_POST['ders_id'];
+    
+    //Tablo Güncelleme İşlemi 
+	$duyurusor=$db->prepare("UPDATE ders SET
+    img=:a 
+    
+    WHERE ders_id={$_POST['ders_id']} ");
+
+    $update=$duyurusor->execute(array(
+    'a'=>$_POST['img']
+    ));
+    if ($update) 
+    {
+    	header("Location:./admin/admin/dersprogrami.php?durum=ok");
+    }
+    else header("Location:./admin/admin/dersprogrami-guncelle.php?durum=no");
+	
+}
+//Etkinlik Güncelleme
+if (isset($_POST['etkinlik-guncelle']))
+ {
+
+    $etkinlik_id=$_POST['etkinlik_id'];
+    
+    //Tablo Güncelleme İşlemi 
+	$etkinliksor=$db->prepare("UPDATE etkinlik SET
+    etkinlik=:a 
+    
+    WHERE id={$_POST['etkinlik_id']} ");
+
+    $update=$etkinliksor->execute(array(
+    'a'=>$_POST['etkinlik']
+    ));
+    if ($update) 
+    {
+    	header("Location:./admin/admin/etkinlik.php?durum=ok");
+    }
+    else header("Location:./admin/admin/etkinlik-guncelle.php?durum=no");
+	
+}
+//Resim Açıklama Güncelleme
+if (isset($_POST['resim-guncelle']))
+ {
+
+    $resim_id=$_POST['resim_id'];
+    
+    //Tablo Güncelleme İşlemi 
+	$resimsor=$db->prepare("UPDATE resim SET
+    aciklama=:a 
+    
+    WHERE resim_id={$_POST['resim_id']} ");
+
+    $update=$resimsor->execute(array(
+    'a'=>$_POST['aciklama']
+    ));
+    if ($update) 
+    {
+    	header("Location:./admin/admin/resim.php?durum=ok");
+    }
+    else header("Location:./admin/admin/resim-guncelle.php?durum=no");
+	
+}
+//Video Açıklama Güncelleme
+if (isset($_POST['video-guncelle']))
+ {
+
+    $video_id=$_POST['video_id'];
+    
+    //Tablo Güncelleme İşlemi 
+	$videosor=$db->prepare("UPDATE video SET
+    aciklama=:a 
+    
+    WHERE id={$_POST['video_id']} ");
+
+    $update=$videosor->execute(array(
+    'a'=>$_POST['aciklama']
+    ));
+    if ($update) 
+    {
+    	header("Location:./admin/admin/video.php?durum=ok");
+    }
+    else header("Location:./admin/admin/video-guncelle.php?durum=no");
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  ?>

@@ -11,7 +11,6 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 $kul_id = $kullanicicek['k_id'];
 $video=$db->prepare("SELECT * FROM video where k_id=:kul_id");
 $video->execute(array('kul_id'=>$kul_id ));
-$video=$video->fetchAll(PDO::FETCH_OBJ);
 }
 else
 {
@@ -48,17 +47,19 @@ include 'header.php';?>
                           <th>Video Adı</th>
                           <th>Yazısı</th>
                           <th>Sil</th>
+                          <th>Düzenle</th>
                         </tr>
                       </thead>
 
 
                       <tbody>
-                        <?php foreach ($video as $video): ?>
+                        <?php while ( $videocek=$video->fetch(PDO::FETCH_ASSOC)) { ?>
                         <tr>
-                          <td> <?php echo $video->aciklama ?> </td>
-                          <td><?php echo $video->link ?> </td>
-                          <td><a  href="../../islem.php?kullanici_id=<?php echo $video->k_id;?>&videosil=ok&id=<?php echo $video->id; ?>">sil</a></td>
-                        <?php endforeach ?>
+                          <td> <?php echo $videocek['aciklama'] ?> </td>
+                          <td><?php echo $videocek['link'] ?> </td>
+                          <td><a  href="../../islem.php?kullanici_id=<?php echo $videocek['k_id'];?>&videosil=ok&id=<?php echo $videocek['id']; ?>">sil</a></td>
+                          <td>  <a href="video-guncelle.php?video_id=<?php echo $videocek['id'];?>&videoguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
+                        <?php } ?>
                         </tr>
                       </tbody>
                     </table>

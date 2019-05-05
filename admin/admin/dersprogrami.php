@@ -40,6 +40,7 @@ include 'header.php';
                         <tr>
                           <th>Program linki</th>
                           <th>Sil</th>
+                          <th>Düzenle</th>
                         </tr>
                       </thead>
 

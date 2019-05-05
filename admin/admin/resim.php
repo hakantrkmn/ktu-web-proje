@@ -55,6 +55,7 @@ include 'header.php';?>
                           <th>Resim</th>
                           <th>Yazısı</th>
                           <th>Sil</th>
+                          <th>Düzenle</th>
                         </tr>
                       </thead>
 
@@ -66,6 +67,7 @@ include 'header.php';?>
                           <td> <img style="max-height:50px;max-weight:50px;" src="resim/<?php echo $resimcek['resim'] ?>" alt=""> </td>
                           <td><?php echo $resimcek['aciklama'] ?></td>
                           <td> <a href="../../islem.php?kullanici_id=<?php echo $resimcek['k_id'];?>&resimsil=ok&id=<?php echo $resimcek['resim_id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
+                          <td>  <a href="resim-guncelle.php?resim_id=<?php echo $resimcek['resim_id'];?>&resimguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
 
                         </tr>
 
