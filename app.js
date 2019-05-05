@@ -156,7 +156,8 @@ $(document).ready(function() {
     $(document).ready (function(){
   
         function getData(){
-        var url = "https://fcc-weather-api.glitch.me/api/current?";
+            
+        var url = "http://api.openweathermap.org/data/2.5/weather?q=trabzon,tr&APPID=0e8673889e563e65952c252f7e44dd7a&units=metric";
       
         var latitude;
         var longitude;
@@ -166,20 +167,23 @@ $(document).ready(function() {
           navigator.geolocation.getCurrentPosition(function(position) {
          latitude = position.coords.latitude;
          longitude = position.coords.longitude;
-         havaDurumUrl = (url + "lat=" + 41.005 +  "&lon=" + 39.72694);
+         havaDurumUrl = (url);
                 $.ajax({
                       url:havaDurumUrl,
-              dataType:'json',
+                  dataType:'json',
                       success: function(result){
-      
+                        console.log(result)
                           $("#sehir").text(result.name);
-                          $("#country").text(result.sys.country);
-                          $("#durum").text(result.weather[0].main);
-                          $("#wind").text(result.wind.speed);
-                          $("#gun").text(moment().format('LL'));
-                          $("#weatherIcon").html("<img src= weatherIcon>" );
+                          $("#nem").text(result.main.humidity);
+                          $("#ruzgar").text(result.wind.speed+" MPH");
                           $("#degree").text(Math.ceil(result.main.temp)+ "°C");
-                          $("#tempMin").text(result.main.temp_min);
+
+                        //   $("#country").text(result.sys.country);
+                        //   $("#durum").text(result.weather[0].main);
+                        //   $("#wind").text(result.wind.speed);
+                        //   $("#gun").text(moment().format('LL'));
+                        //   $("#weatherIcon").html("<img src= weatherIcon>" );
+                        //   $("#tempMin").text(result.main.temp_min);
             
                       
                 
@@ -189,25 +193,21 @@ $(document).ready(function() {
           switch(havaresmi){
              case 'Clouds':
                     day = "bulutludur";
-                   $("#img").attr("src",result.weather[0].icon);
+                   $("#img").attr("src","https://image.flaticon.com/icons/svg/149/149209.svg");
                     break;
              case 'Rain':
                     day = "yağmurludur";
-              $("#img").attr("src","https://cdn4.iconfinder.com/data/icons/weather-129/64/weather-5-128.png");
+              $("#img").attr("src","https://image.flaticon.com/icons/svg/131/131041.svg");
                     break;
               case 'Clear':
                     day = "açık";
-              $("#img").attr("src",result.weather[0].icon);
+              $("#img").attr("src","https://image.flaticon.com/icons/svg/606/606795.svg");
                     break;
                 case 'Thunderstorm':
                     day = "şimşek";
-              $("#img").attr("src","https://cdn4.iconfinder.com/data/icons/weather-129/64/weather-8-128.png");
+              $("#img").attr("src","https://image.flaticon.com/icons/svg/1146/1146921.svg");
                     break;
-        }
-        document.getElementById('baslik').innerHTML=day;
-              
-                var c = result.main.temp_min;
-            
+        }   
                       }
                   });
             });

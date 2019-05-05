@@ -59,8 +59,10 @@ if (isset($_GET['bolum'])) {
   <link rel="stylesheet" href="app.css">
 
   <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/tr/7/7d/KTU_Yeni_Logo.png">
 
-  <title>ödev</title>
+
+  <title>Proje</title>
   <script src="app.js"></script>
   <script src="moment-with-locales.js"></script>
 </head>
@@ -73,6 +75,9 @@ if (isset($_GET['bolum'])) {
       <div class="col-md-12">
                 <!-- KAYAN DUYURULAR -->
         <div>
+        <div style="text-align:center">
+            <span style="font-family: 'Merriweather', serif;font-size: -webkit-xxx-large;">Duyurular</span>
+          </div>
           <div class="card">
             <div class="card-body">
                <input class="duyuru" type="hidden" name="" value="<?php echo end($duyurular)->duyuru ?>">
@@ -153,14 +158,31 @@ if (isset($_GET['bolum'])) {
         </div>
         <!-- DERS PROGRAMI -->
         <!-- HAVA DURUMU -->
-        <div class="card sa">
+        <div id="weather_wrapper">
+	<div class="weatherCard">
+		<div class="currentTemp">
+			<span id="degree" class="temp"></span>
+			<span id="sehir" class="location"></span>
+		</div>
+		<div class="currentWeather">
+      <img id="img" class="olcum" src="" alt="">
+			<div class="info">
+				<span id="nem" class="rain"></span>
+				<span id="ruzgar" class="wind"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+        <!-- <div class="card sa">
           <div id="sehir" class="city">Eindhoven</div>
           <div id="gun" class="date">29 september 2015</div>
           <div class="weather">
             <div class="sun"><img style="    width: 6em;height: 6em;" id="img" src="" alt=""></div>
             <div id="degree" style="text-align:right;padding-right:20px" class="temp">12°C</div>
           </div>
-        </div>
+        </div> -->
         <!-- HAVA DURUMU -->
       </div>
     </div>
