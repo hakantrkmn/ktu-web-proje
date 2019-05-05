@@ -1,84 +1,78 @@
-
 <?php
-
 // bağlan phpde session dursun headerin içinde bişe olmasın her yere bağlan phpyi eklersin
 
 include '../../baglan.php';
 
 
-
-
 if (isset($_SESSION['k_ad']))
 {    
-$kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:ad");
-$kullanicisor->execute(array('ad'=>$_SESSION['k_ad']));
-$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
-$kul_id = $kullanicicek['k_id'];
-$duyurusor=$db->prepare("SELECT * FROM duyuru where k_id=:kul_id ");
-$duyurusor->execute(array('kul_id'=>$kul_id ));
+  $kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:email");
+  $kullanicisor->execute(array('email'=>$_SESSION['k_ad']));
+  $say=$kullanicisor->rowCount();
+  $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+  $kul_id = $kullanicicek['k_id'];
+  $dersprogramisor=$db->prepare("SELECT * FROM ders where k_id=:kul_id ");
+  $dersprogramisor->execute(array('kul_id'=>$kul_id ));
+  $dersprogramicek=$dersprogramisor->fetchAll(PDO::FETCH_OBJ);
 }
-else
+
+
+if (isset($_GET['ders_id']) and ($_GET['dersguncelle']=="ok") )
 {
-  header("Location:../../login.php");
+                
+                  
+$derssor=$db->prepare("SELECT * FROM ders WHERE ders_id=:d_id ");
+$derssor->execute(array(
+'d_id'=>($_GET['ders_id'])
+));
+
+$dersprogramicek=$derssor->fetch(PDO::FETCH_ASSOC);
 }
+
+
 include 'header.php';
 
 ?>
 
-      <!-- page content -->
-      <div class="right_col" role="main">
-        <div class="">
-
-          <div class="clearfix"></div>
-
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Duyurular</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <table id="datatable" class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Duyuru</th>
-                        <th>Sil</th>
-                        <th>Düzenle</th>
-                      </tr>
-                    </thead>
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
 
 
-                    <tbody>
-                      
-                      <?php while ($duyurucek=$duyurusor->fetch(PDO::FETCH_ASSOC)) { ?>
-                        
-                      
-                      <tr>
-                        <td>  <?php echo $duyurucek['duyuru'] ?> </td>
-                        <td> <a class="" href="../../islem.php?kullanici_id=<?php echo $duyurucek['k_id'];?>&duyurusil=ok&id=<?php echo $duyurucek['id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
-                         <td>  <a href="duyuru-guncelle.php?duyuru_id=<?php echo $duyurucek['id'];?>&duyuruguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
+    <div class="clearfix"></div>
 
-                      </tr>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <form action="../../islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                      <?php } ?>
+            <input type="hidden" name="kullanici_id" value="<?php echo $kullanicicek['kullanici_id'] ?>">
+            <div class="form-group">
 
-
-
-
-                      
-                    </tbody>
-                  </table>
-                </div>
-                <div style="text-align:right;">
-                  <a class="btn btn-success" href="ekledyr.php">yeni ekle</a>
+              <div style="display: none;" class="col-md-6 col-sm-6 col-xs-12">
+                <input   type="text" id="first-name" name="ders_id" 
+                value="<?php echo $dersprogramicek['ders_id'] ?> " required="required" class="form-control col-md-7 col-xs-12">
               </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ders Programı <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="first-name" name="img"
+                value="<?php echo $dersprogramicek['img'] ?> " required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="form-group">
+              <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+
+               <button type="submit"  name="dersprogrami-guncelle" class="btn btn-success">Güncelle </button>
+             </div>
+           </div>
+
+         </form>
+
+      </div>
               </div>
             </div>
           </div>

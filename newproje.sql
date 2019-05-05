@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost
--- Üretim Zamanı: 04 May 2019, 15:03:06
+-- Üretim Zamanı: 05 May 2019, 12:48:41
 -- Sunucu sürümü: 5.7.17-log
 -- PHP Sürümü: 5.6.30
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Veritabanı: `yeniproje`
+-- Veritabanı: `newproje`
 --
 
 -- --------------------------------------------------------
@@ -37,9 +37,8 @@ CREATE TABLE `ders` (
 --
 
 INSERT INTO `ders` (`ders_id`, `img`, `k_id`) VALUES
-(3, 'safsafsdfsdfsdgsdgdsf65dd6fsd', 1),
 (4, 'dfsdfsdfsdfsdfsdfsd.sadsadsad', 3),
-(5, 'sdadsdas', 1);
+(10, 'TORUNBABA PİYASADA ONLİNE', 1);
 
 -- --------------------------------------------------------
 
@@ -60,7 +59,9 @@ CREATE TABLE `duyuru` (
 INSERT INTO `duyuru` (`id`, `duyuru`, `k_id`) VALUES
 (3, 'son 14 gün', 3),
 (4, 'son 34 gün', 3),
-(8, 'hahaha', 1);
+(13, 'TORUN', 1),
+(15, 'Oğuzhan', 1),
+(16, 'SA ', 1);
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,8 @@ CREATE TABLE `etkinlik` (
 
 INSERT INTO `etkinlik` (`id`, `etkinlik`, `k_id`) VALUES
 (1, 'allame gelecek', 1),
-(4, 'sago gg', 1);
+(5, 'RECEP TAYYİP ERDOĞAN', 1),
+(6, 'CEZA COK KOTU RAP YAPAR A DOSTLAR', 1);
 
 -- --------------------------------------------------------
 
@@ -121,7 +123,28 @@ CREATE TABLE `resim` (
 --
 
 INSERT INTO `resim` (`resim_id`, `resim`, `aciklama`, `k_id`) VALUES
-(7, '4359013264.jpg', 'TENGRİ MİZ MENEN', 1);
+(7, '4359013264.jpg', ' BOZKURTLAR ULUSUN TANRI TÜRKÜ KORUSUN', 1),
+(8, '2245917970.jpg', 'HAKAN', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `video`
+--
+
+CREATE TABLE `video` (
+  `id` int(11) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `aciklama` varchar(255) NOT NULL,
+  `k_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `video`
+--
+
+INSERT INTO `video` (`id`, `link`, `aciklama`, `k_id`) VALUES
+(6, '2512748908.mp4', 'KAT-LA-NA-RAK', 1);
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -162,6 +185,13 @@ ALTER TABLE `resim`
   ADD KEY `k_id` (`k_id`);
 
 --
+-- Tablo için indeksler `video`
+--
+ALTER TABLE `video`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kullanici_video` (`k_id`);
+
+--
 -- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
 --
 
@@ -169,17 +199,17 @@ ALTER TABLE `resim`
 -- Tablo için AUTO_INCREMENT değeri `ders`
 --
 ALTER TABLE `ders`
-  MODIFY `ders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Tablo için AUTO_INCREMENT değeri `duyuru`
 --
 ALTER TABLE `duyuru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- Tablo için AUTO_INCREMENT değeri `etkinlik`
 --
 ALTER TABLE `etkinlik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Tablo için AUTO_INCREMENT değeri `kullanici`
 --
@@ -189,7 +219,12 @@ ALTER TABLE `kullanici`
 -- Tablo için AUTO_INCREMENT değeri `resim`
 --
 ALTER TABLE `resim`
-  MODIFY `resim_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `resim_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- Tablo için AUTO_INCREMENT değeri `video`
+--
+ALTER TABLE `video`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
 --
@@ -217,6 +252,12 @@ ALTER TABLE `etkinlik`
 --
 ALTER TABLE `resim`
   ADD CONSTRAINT `resim_ibfk_1` FOREIGN KEY (`k_id`) REFERENCES `kullanici` (`k_id`);
+
+--
+-- Tablo kısıtlamaları `video`
+--
+ALTER TABLE `video`
+  ADD CONSTRAINT `kullanici_video` FOREIGN KEY (`k_id`) REFERENCES `kullanici` (`k_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

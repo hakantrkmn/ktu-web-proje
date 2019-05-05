@@ -1,6 +1,12 @@
+
 <?php
 
+// bağlan phpde session dursun headerin içinde bişe olmasın her yere bağlan phpyi eklersin
+
 include '../../baglan.php';
+
+
+
 
 if (isset($_SESSION['k_ad']))
 {    
@@ -8,17 +14,30 @@ $kullanicisor=$db->prepare("SELECT * FROM kullanici WHERE k_ad=:ad");
 $kullanicisor->execute(array('ad'=>$_SESSION['k_ad']));
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 $kul_id = $kullanicicek['k_id'];
+$duyurusor=$db->prepare("SELECT * FROM duyuru where k_id=:kul_id ");
+$duyurusor->execute(array('kul_id'=>$kul_id ));
 }
 else
 {
   header("Location:../../login.php");
 }
-include 'header.php';?>
+if (isset($_GET['duyuru_id']) and ($_GET['duyuruguncelle']=="ok") )
+{
+                
+                  
+$duyurusor=$db->prepare("SELECT * FROM duyuru WHERE id=:d_id ");
+$duyurusor->execute(array(
+'d_id'=>$_GET['duyuru_id']
+));
+
+$duyurucek=$duyurusor->fetch(PDO::FETCH_ASSOC);
+}
 
 
 
+include 'header.php';
 
-
+?>
 
       <!-- page content -->
       <div class="right_col" role="main">
@@ -29,57 +48,38 @@ include 'header.php';?>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
-                <div class="x_title">
-                  <h2>Resim Ekle</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <br />
-                  <form id="demo-form2" action="../../islem.php" method="POST" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
+                <form action="../../islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Resim  <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" name="yukle_resim" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                      <input type="hidden" name="kullanici_id" value="<?php echo $kullanicicek['kullanici_id'] ?>">
+                       <div class="form-group">
+                        
+                        <div style="display: none;" class="col-md-6 col-sm-6 col-xs-12">
+                          <input   type="text" id="first-name" name="duyuru_id" 
+                          value="<?php echo $duyurucek['id'] ?> " required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
                       </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Açıklama  <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input  type="text" name="aciklama" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Duyuru <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="duyuru"
+                          value="<?php echo $duyurucek['duyuru'] ?> " required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          
+                           <button type="submit"  name="duyuru-guncelle" class="btn btn-success">Güncelle </button>
+                        </div>
                       </div>
 
-                    </div>
-                    <div class="form-group">
-                      <label style="display: none;" class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">açıklama  <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input style="display: none;" type="text" name="kullanici_id" id="first-name" value="<?php echo $kul_id  ?>" required="required" class="form-control col-md-7 col-xs-12">
-                      </div>
-
-                    </div>
-                    <div class="form-group">
-                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button name="resimyukle" type="submit" class="btn btn-success">Ekle</button>
-                      </div>
-                    </div>
-
-                  </form>
-                </div>
+                    </form>
               </div>
-            </div><div class="col-md-12 col-sm-12 col-xs-12">
-
+              </div>
             </div>
           </div>
+          
         </div>
       </div>
       <!-- /page content -->
@@ -126,4 +126,6 @@ include 'header.php';?>
   <script src="../build/js/custom.min.js"></script>
 
 </body>
+
+
 </html>

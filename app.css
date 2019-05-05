@@ -2,6 +2,13 @@ body {
     background:#dbdbdb;
   }
 
+.video-fluid{
+    margin-left: auto;
+    margin-right: auto;
+  }
+.olcu{
+  max-height: 400px;
+}
   @import url(https://fonts.googleapis.com/css?family=Roboto);
 
 

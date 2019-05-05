@@ -1,4 +1,149 @@
 $(document).ready(function() {
+      $(".carousel-item").first().addClass("active")
+
+
+
+      var bolum = $("#bolum").val()
+      // DUYURULAR GÜNCELLEME
+      console.log($(".etkinlikler").last().text())
+      setInterval(function(){
+            $.ajax({
+                  type:'POST',
+                  url:'api.php',
+                  dataType: "json",
+                  data:{duyuru:"1",bolum:bolum},
+                  success:function(result){
+                        if(result.duyuru==$(".duyuru").val())
+                        {
+                        }
+                        else
+                        {
+                              $("#duyuru").append("-"+ result.duyuru)
+                              $(".duyuru").val(result.duyuru)
+      
+                        }
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                  }
+            });
+            $.ajax({
+                  type:'POST',
+                  url:'api.php',
+                  dataType: "json",
+                  data:{etkinlik:"1",bolum:bolum},
+                  success:function(result){
+                        if(result.etkinlik==$("#etkinlik").val())
+                        {
+                        }
+                        else
+                        {
+                              $(".etkinlikler").last().after("<li class='etkinlikler'>"+result.etkinlik+"</li>")
+                              $("#etkinlik").val(result.etkinlik)
+      
+                        }
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                  }
+            });
+            // console.log($(".videolar").last().attr("src"))
+            $.ajax({
+                  type:'POST',
+                  url:'api.php',
+                  dataType: "json",
+                  data:{video:"1",bolum:bolum},
+                  success:function(result){
+                        if("admin/admin/video/"+result.link==$(".videolar").last().attr("src"))
+                        {
+                        }
+                        else
+                        {
+                              $(".carousel-item").last().after('<div class="carousel-item"><div class="view"><video class="video-fluid" autoplay loop muted><source class="videolar" src="admin/admin/video/'+ result.link +'" type="video/mp4" /></video></div><div class="carousel-caption"><div class="animated fadeInDown"><p class="aciklama" >'+ result.aciklama +'</p></div></div></div>')
+
+      
+                        }
+
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                  }
+            });
+            $.ajax({
+                  type:'POST',
+                  url:'api.php',
+                  dataType: "json",
+                  data:{resim:"1",bolum:bolum},
+                  success:function(result){
+                        if("admin/admin/resim/"+result.resim==$(".resim").last().attr("src"))
+                        {
+                        }
+                        else
+                        {
+                              $(".carousel-item").last().after('<div class="carousel-item"><div class="view"><img class="d-block w-100 olcu resim" src="admin/admin/resim/'+ result.resim +'"alt="Second slide"></div><div class="carousel-caption"><div class="animated fadeInDown"><p class="aciklama" >'+ result.aciklama +'</p></div></div></div>')
+
+      
+                        }
+
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                  }
+            });
+        },1000);
+      //   DUYURULAR GÜNCELLEME 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   console.log(moment.locale("tr"))
     function scroll() {
@@ -39,7 +184,7 @@ $(document).ready(function() {
                       
                 
             var havaresmi = result.weather[0].main;
-            console.log(result.weather)
+            console.log(result)
 
           switch(havaresmi){
              case 'Clouds':
@@ -52,7 +197,7 @@ $(document).ready(function() {
                     break;
               case 'Clear':
                     day = "açık";
-              $("#img").attr("src","https://cdn2.iconfinder.com/data/icons/weathery/100/sun-256.png");
+              $("#img").attr("src",result.weather[0].icon);
                     break;
                 case 'Thunderstorm':
                     day = "şimşek";

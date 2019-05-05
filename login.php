@@ -25,7 +25,6 @@
 <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
 
 <title>ödev</title>
-<script src="app.js"></script>
 <script src="moment-with-locales.js"></script>
 </head>
 
