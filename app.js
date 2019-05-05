@@ -5,7 +5,6 @@ $(document).ready(function() {
 
       var bolum = $("#bolum").val()
       // DUYURULAR GÜNCELLEME
-      console.log($(".etkinlikler").last().text())
       setInterval(function(){
             $.ajax({
                   type:'POST',
@@ -13,7 +12,7 @@ $(document).ready(function() {
                   dataType: "json",
                   data:{duyuru:"1",bolum:bolum},
                   success:function(result){
-                        if(result.duyuru==$(".duyuru").val())
+                        if(result.duyuru==$(".duyuru").val() || result=="0")
                         {
                         }
                         else
@@ -34,7 +33,7 @@ $(document).ready(function() {
                   dataType: "json",
                   data:{etkinlik:"1",bolum:bolum},
                   success:function(result){
-                        if(result.etkinlik==$("#etkinlik").val())
+                        if(result.etkinlik==$("#etkinlik").val() || result=="0")
                         {
                         }
                         else
@@ -56,7 +55,7 @@ $(document).ready(function() {
                   dataType: "json",
                   data:{video:"1",bolum:bolum},
                   success:function(result){
-                        if("admin/admin/video/"+result.link==$(".videolar").last().attr("src"))
+                        if("admin/admin/video/"+result.link==$(".videolar").last().attr("src") || result=="0")
                         {
                         }
                         else
@@ -78,7 +77,7 @@ $(document).ready(function() {
                   dataType: "json",
                   data:{resim:"1",bolum:bolum},
                   success:function(result){
-                        if("admin/admin/resim/"+result.resim==$(".resim").last().attr("src"))
+                        if("admin/admin/resim/"+result.resim==$(".resim").last().attr("src") || result=="0")
                         {
                         }
                         else
@@ -100,7 +99,7 @@ $(document).ready(function() {
                   dataType: "json",
                   data:{ders:"1",bolum:bolum},
                   success:function(result){
-                        if(result.img==$("#dersprg").attr("src"))
+                        if(result.img==$("#dersprg").attr("src") || result=="0")
                         {
                         }
                         else

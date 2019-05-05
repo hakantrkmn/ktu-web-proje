@@ -16,6 +16,7 @@ if (isset($_GET['bolum'])) {
   { 
     $yazi = $yazi . " - " . $duyurular[$i]->duyuru;
   }
+  
   $etkinlik=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id ");
   $etkinlik->execute(array('kul_id'=>$kid->k_id ));
   $etkinlik=$etkinlik->fetchAll(PDO::FETCH_OBJ);
