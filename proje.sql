@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1:3306
--- Üretim Zamanı: 05 May 2019, 15:31:07
+-- Üretim Zamanı: 12 May 2019, 18:15:03
 -- Sunucu sürümü: 5.7.24
 -- PHP Sürümü: 7.2.14
 
@@ -35,7 +35,14 @@ CREATE TABLE IF NOT EXISTS `ders` (
   `k_id` int(11) NOT NULL,
   PRIMARY KEY (`ders_id`),
   KEY `k_id` (`k_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Tablo döküm verisi `ders`
+--
+
+INSERT INTO `ders` (`ders_id`, `img`, `k_id`) VALUES
+(1, 'http://www.ktu.edu.tr/dosyalar/bilgisayar_1fd3b.pdf', 4);
 
 -- --------------------------------------------------------
 
@@ -50,7 +57,15 @@ CREATE TABLE IF NOT EXISTS `duyuru` (
   `k_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `kullanici_duyuru` (`k_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `duyuru`
+--
+
+INSERT INTO `duyuru` (`id`, `duyuru`, `k_id`) VALUES
+(1, 'dfg', 4),
+(2, 'bak yaw', 5);
 
 -- --------------------------------------------------------
 
@@ -62,10 +77,24 @@ DROP TABLE IF EXISTS `etkinlik`;
 CREATE TABLE IF NOT EXISTS `etkinlik` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `etkinlik` varchar(255) NOT NULL,
+  `tarih` date NOT NULL,
   `k_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `kullanici_etkinlik` (`k_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `etkinlik`
+--
+
+INSERT INTO `etkinlik` (`id`, `etkinlik`, `tarih`, `k_id`) VALUES
+(2, 'asfas', '2019-05-19', 4),
+(4, 'dfg', '2019-05-11', 4),
+(11, '4 mayıs', '2019-05-04', 4),
+(13, 'asfasf', '2019-05-05', 4),
+(14, 'asf', '2019-05-04', 4),
+(15, 'haha', '2019-05-01', 5),
+(16, 'haha2', '2019-05-02', 5);
 
 -- --------------------------------------------------------
 
@@ -79,7 +108,15 @@ CREATE TABLE IF NOT EXISTS `kullanici` (
   `k_ad` varchar(20) NOT NULL,
   `sifre` varchar(20) NOT NULL,
   PRIMARY KEY (`k_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Tablo döküm verisi `kullanici`
+--
+
+INSERT INTO `kullanici` (`k_id`, `k_ad`, `sifre`) VALUES
+(4, 'bilgisayar', '123456'),
+(5, 'elektrik', '123456');
 
 -- --------------------------------------------------------
 
@@ -95,7 +132,14 @@ CREATE TABLE IF NOT EXISTS `resim` (
   `k_id` int(11) NOT NULL,
   PRIMARY KEY (`resim_id`),
   KEY `k_id` (`k_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Tablo döküm verisi `resim`
+--
+
+INSERT INTO `resim` (`resim_id`, `resim`, `aciklama`, `k_id`) VALUES
+(5, '2425632199.png', 'as', 4);
 
 -- --------------------------------------------------------
 
@@ -111,7 +155,14 @@ CREATE TABLE IF NOT EXISTS `video` (
   `k_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `kullanici_video` (`k_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `video`
+--
+
+INSERT INTO `video` (`id`, `link`, `aciklama`, `k_id`) VALUES
+(1, '3323644889.mp4', 'sa', 4);
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
