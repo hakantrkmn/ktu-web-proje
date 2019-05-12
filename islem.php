@@ -40,7 +40,7 @@ if (isset($_GET['etkinliksil']) and ($_GET['etkinliksil']=="ok"))
     $kontrol=$sil->execute(array('y_id'=>$_GET['id'] ));
 	if ($kontrol) 
 	{
-        header("Location:./admin/admin/duyuru.php?durum=ok");
+        header("Location:./admin/admin/etkinlik.php?durum=ok");
     }
 }
 // video silme 
@@ -63,8 +63,8 @@ if (isset($_GET['videosil']) and ($_GET['videosil']=="ok"))
 // etkinlik ekleme
 if(isset($_POST['etkinlikekle'])) 
 {
-	$duyurukaydet=$db->prepare("INSERT INTO etkinlik SET etkinlik=:dyrmetin,k_id=:kk_id");
-	$ekle=$duyurukaydet->execute(array('dyrmetin'=>$_POST['etkinlik'],'kk_id'=>$_POST['kullanici_id']));
+	$duyurukaydet=$db->prepare("INSERT INTO etkinlik SET etkinlik=:dyrmetin,tarih=:tarih ,k_id=:kk_id");
+	$ekle=$duyurukaydet->execute(array('dyrmetin'=>$_POST['etkinlik'],'tarih'=>$_POST['tarih'] ,'kk_id'=>$_POST['kullanici_id']));
 	header("Location:./admin/admin/etkinlik.php");
 }
 // dersprogramı ekleme
@@ -195,8 +195,8 @@ if (isset($_POST['etkinlik-guncelle']))
  {
     $etkinlik_id=$_POST['etkinlik_id'];    
     //Tablo Güncelleme İşlemi 
-	$etkinliksor=$db->prepare("UPDATE etkinlik SET etkinlik=:a WHERE id={$_POST['etkinlik_id']} ");
-    $update=$etkinliksor->execute(array('a'=>$_POST['etkinlik']));
+	$etkinliksor=$db->prepare("UPDATE etkinlik SET etkinlik=:a , tarih=:b  WHERE id={$_POST['etkinlik_id']} ");
+    $update=$etkinliksor->execute(array('a'=>$_POST['etkinlik'] , 'b' => $_POST['tarih'] ));
     if ($update) 
     {
     	header("Location:./admin/admin/etkinlik.php?durum=ok");

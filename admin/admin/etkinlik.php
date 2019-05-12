@@ -44,6 +44,7 @@ include 'header.php';
                     <thead>
                       <tr>
                         <th>Etkinlik</th>
+                        <th>Tarih</th>
                         <th>Sil</th>
                         <th>Düzenle</th>
                       </tr>
@@ -52,6 +53,7 @@ include 'header.php';
                       <?php while ($etkinlikcek=$etkinliksor->fetch(PDO::FETCH_ASSOC)) { ?>
                         <tr>
                           <td>  <?php echo $etkinlikcek['etkinlik'] ?> </td>
+                          <td><?php echo $etkinlikcek['tarih'] ?></td>
                           <td> <a href="../../islem.php?kullanici_id=<?php echo $etkinlikcek['k_id'];?>&etkinliksil=ok&id=<?php echo $etkinlikcek['id']; ?>"> <button class="btn btn-secondary" > SİL</button></a></td>
                           <td>  <a href="etkinlik-guncelle.php?etkinlik_id=<?php echo $etkinlikcek['id'];?>&etkinlikguncelle=ok"><button class="btn btn-secondary ">Düzenle</button></a></td>
                         </tr>
@@ -67,6 +69,7 @@ include 'header.php';
           </div>
         </div>
       </div>
+
       <!-- /page content -->
 
       <!-- footer content -->

@@ -51,6 +51,7 @@ include 'header.php';
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="first-name" name="etkinlik" value="<?php echo $etkinlikcek['etkinlik'] ?> " required="required" class="form-control col-md-7 col-xs-12">
+                 <input style="margin-top:40px" type="date" name="tarih" value="<?php echo$etkinlikcek['tarih']?>" class="form-control " >
               </div>
             </div>
             <div class="ln_solid"></div>

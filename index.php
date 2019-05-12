@@ -1,8 +1,10 @@
 <?php
 include 'baglan.php';
-
+setlocale(LC_TIME, "turkish"); //başka bir dil içinse burada belirteceksin.
+setlocale(LC_ALL,'turkish');
 
 if (isset($_GET['bolum'])) {
+  a:
   $bolum = $_GET['bolum'];
   $kid=$db->prepare("SELECT k_id FROM kullanici where k_ad=:kul_ad ");
   $kid->execute(array('kul_ad'=>$bolum ));
@@ -17,6 +19,10 @@ if (isset($_GET['bolum'])) {
     $yazi = $yazi . " - " . $duyurular[$i]->duyuru;
   }
   
+  $kullanicilar=$db->prepare("SELECT * FROM kullanici ");
+  $kullanicilar->execute();
+  $kullanicilar=$kullanicilar->fetchAll(PDO::FETCH_OBJ);
+
   $etkinlik=$db->prepare("SELECT * FROM etkinlik where k_id=:kul_id ");
   $etkinlik->execute(array('kul_id'=>$kid->k_id ));
   $etkinlik=$etkinlik->fetchAll(PDO::FETCH_OBJ);
@@ -31,6 +37,12 @@ if (isset($_GET['bolum'])) {
   $dersprogrami=$db->prepare("SELECT * FROM ders where k_id=:kul_id");
   $dersprogrami->execute(array('kul_id' =>$kid->k_id ));
   $dersprogrami=$dersprogrami->fetch(PDO::FETCH_OBJ);
+}
+else
+{
+  $_GET['bolum']="bilgisayar";
+  goto a;
+
 }
 ?>
 
@@ -64,14 +76,38 @@ if (isset($_GET['bolum'])) {
 
 
   <title>Proje</title>
-  <script src="app.js"></script>
   <script src="moment-with-locales.js"></script>
+    <script src="app.js"></script>
 </head>
 
 
 <body>
+  
+
+<header>
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <a class="navbar-brand" href="#"><strong>Ktü</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <?php foreach($kullanicilar as $kullanici) : ?>
+        <li class="nav-item ">
+          <a class="nav-link" href="./?bolum=<?php echo $kullanici->k_ad ?>"> <?php echo $kullanici->k_ad ?></a>
+        </li>
+        <?php endforeach ?>
+      </ul>
+    </div>
+  </nav>
+
+
+
+</header>
   <input type="hidden" id="bolum" value="<?php echo $_GET['bolum'] ?>">
-  <div style="margin-top:50px" class="container">
+  <div style="margin-top:70px" class="container">
     <div class="row">
       <div class="col-md-12">
                 <!-- KAYAN DUYURULAR -->
@@ -144,7 +180,7 @@ if (isset($_GET['bolum'])) {
             <ol style="list-style: none;padding: 0;word-break: break-all">
               <input id="etkinlik" type="hidden" name="" value="<?php echo end($etkinlik)->etkinlik  ?>">
               <?php foreach ($etkinlik as $etkinlik): ?>
-                <li class="etkinlikler"> <?php echo $etkinlik->etkinlik ?> </li>
+                <li class="etkinlikler"><?php   echo iconv('latin5','utf-8',strftime(' %d %B %Y %A ',strtotime($etkinlik->tarih)));?> <br> <?php echo $etkinlik->etkinlik ?> </li>
               <?php endforeach; ?>
             </ol>
           </div>    
@@ -153,9 +189,9 @@ if (isset($_GET['bolum'])) {
       </div>
       <div class="col-md-5">
         <!-- DERS PROGRAMI -->
-        <div style="text-align:center">
+        <div>
           <span style="font-family: 'Merriweather', serif;font-size: -webkit-xxx-large;">Ders Programı</span>
-          <iframe id="dersprg" src="<?php echo $dersprogrami->img ?>" style="width:100%; height:200px;" frameborder="0"></iframe>
+          <iframe style="width:400px" id="dersprg" src="<?php echo $dersprogrami->img ?>" style="width:100%; height:200px;" frameborder="0"></iframe>
         </div>
         <!-- DERS PROGRAMI -->
         <!-- HAVA DURUMU -->

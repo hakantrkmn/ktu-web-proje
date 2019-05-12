@@ -1,4 +1,6 @@
 $(document).ready(function() {
+      var months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];;
+
       $(".carousel-item").first().addClass("active")
 
 
@@ -17,6 +19,7 @@ $(document).ready(function() {
                         }
                         else
                         {
+                              console.log("sa")
                               $("#duyuru").append("-"+ result.duyuru)
                               $(".duyuru").val(result.duyuru)
       
@@ -35,10 +38,16 @@ $(document).ready(function() {
                   success:function(result){
                         if(result.etkinlik==$("#etkinlik").val() || result=="0")
                         {
+                             
                         }
                         else
                         {
-                              $(".etkinlikler").last().after("<li class='etkinlikler'>"+result.etkinlik+"</li>")
+                              
+                              var d = new Date(result.tarih)
+                              var ay = d.getMonth()
+                              console.log("<li class='etkinlikler'>"+ d.getDay()+" "+ months[ay+1]+" "+ d.getFullYear() +"<br>" +result.etkinlik+"</li>")
+                              console.log(result)
+                              $(".etkinlikler").last().after("<li class='etkinlikler'>"+ d.getDay()+" "+ months[ay]+" "+ d.getFullYear() +"<br>" +result.etkinlik+"</li>")
                               $("#etkinlik").val(result.etkinlik)
       
                         }
@@ -79,9 +88,12 @@ $(document).ready(function() {
                   success:function(result){
                         if("admin/admin/resim/"+result.resim==$(".resim").last().attr("src") || result=="0")
                         {
+                              console.log("sa")
                         }
                         else
                         {
+                              console.log("as")
+
                               $(".carousel-item").last().after('<div class="carousel-item"><div class="view"><img class="d-block w-100 olcu resim" src="admin/admin/resim/'+ result.resim +'"alt="Second slide"></div><div class="carousel-caption"><div class="animated fadeInDown"><p class="aciklama" >'+ result.aciklama +'</p></div></div></div>')
 
       
@@ -168,9 +180,13 @@ $(document).ready(function() {
 
   console.log(moment.locale("tr"))
     function scroll() {
-      $('#events ol li:first').slideUp(function() {
-        $(this).show().parent().append(this);
-      });
+          if($('#events ol li').length!=1)
+          {
+            $('#events ol li:first').slideUp(function() {
+                  $(this).show().parent().append(this);
+                });
+          }
+      
     }
     setInterval(scroll, 2000);
   
@@ -183,11 +199,10 @@ $(document).ready(function() {
         var latitude;
         var longitude;
         var havaDurumUrl;
+
       
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-         latitude = position.coords.latitude;
-         longitude = position.coords.longitude;
+          
+
          havaDurumUrl = (url);
                 $.ajax({
                       url:havaDurumUrl,
@@ -231,8 +246,8 @@ $(document).ready(function() {
         }   
                       }
                   });
-            });
-          };
+            
+         
         }
         getData();
         

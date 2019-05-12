@@ -40,6 +40,7 @@ include 'header.php';?>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="first-name" required=""  name="etkinlik" class="form-control col-md-7 col-xs-12">
+                        <input style="margin-top:40px" required="required" type="date" name="tarih" class="form-control " >
                         <input  type="hidden" id="first-name" required="" value="<?php echo $kullanicicek['k_id'] ?>" name="kullanici_id" class="form-control col-md-7 col-xs-12">
                         <button style="margin-top:10px"  name="etkinlikekle" type="submit" class="btn btn-success">Ekle</button>
                       </div>
